@@ -1,9 +1,14 @@
+var pos = {};
+pos.row = {};
+pos.column = {};
 var tmp = {};
 tmp.src="";
 tmp.last="";
 tmp.row = -1;
 tmp.column = -1;
 time = 5;
+tmp.levelMap = [[1,2,3,5,4], [1,3,5,2,2], [2,1,2,4,4], [3,5,1,2,3], [1,5,2,1,4]];
+
 function getMouse(object, event){
 	var cells = document.getElementsByTagName('td');
 	tmp.row = object.row;
@@ -24,10 +29,15 @@ function getMouse(object, event){
 		cells[i].setAttribute('onmouseout', 'decolor(this)');
 	}
 	document.onmouseup = function(){
-		for (var i = 0; i<cells.length; i++){
-			cells[i].setAttribute('onmouseover', '');
-			cells[i].style.backgroundColor = '';
+		for (var i = 0, j=0; i<cells.length; j++){
+			for(var k = 0; k<5; k++, i++){
+				cells[i].setAttribute('onmouseover', '');
+				cells[i].style.backgroundColor = '';
+				tmp.levelMap[j][k] = cells[i].firstChild.getAttribute('value');
+			}	
 		}
+		checkGrid();
+
 	}
 }
 function decolor(object){
@@ -40,7 +50,6 @@ function transfer(object){
 		row[i].style.backgroundColor = "";
 		column[i].style.backgroundColor = "";
 	}
-	console.log(object);
 	if (object.column > tmp.column){
 		moveRight();
 	}
@@ -119,4 +128,47 @@ function moveDown(){
 		srcParent.appendChild(tmp.last);
 	}
 	tmp.row++;
+}
+
+function checkGrid(){
+	for (var i = 0; i<5; i++){
+		pos.row[i] = null;
+		var consecutive = 1;
+		for (var j = 0; j<5; j++){
+			if (j!= 0){
+				if (tmp.levelMap[i][j] == tmp.levelMap[i][j-1]){
+				consecutive++;
+					if (consecutive >= 3){
+						pos.row[i] = {i,j, consecutive};
+						//console.log(pos.row);
+					}
+				}
+				else{
+					consecutive=1;
+				}	
+
+			}
+					
+		}
+	}
+	for (var j = 0; j<5; j++){
+		pos.column[j] = null;
+		var consecutive = 1;
+		for (var i = 0; i<5; i++){
+			if (i!= 0){
+				if (tmp.levelMap[i][j] == tmp.levelMap[i-1][j]){
+					consecutive++;
+					if (consecutive >= 3){
+						pos.column[j] = {i, j, consecutive};
+					}
+				}
+			}
+			
+			else{
+				consecutive=1;
+			}			
+		}
+	}
+
+	console.log(pos);
 }

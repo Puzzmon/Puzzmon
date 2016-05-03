@@ -1,16 +1,15 @@
 
 window.onload = function(){
-	var screen = document.getElementsByTagName('body')[0];
-	var levelMap = [[1,2,3,5,4], [1,3,5,2,2], [2,1,2,4,4], [3,5,1,2,3], [1,5,2,1,4]];
+	var screen = document.getElementById('grid');
 
 	var newCircle = function(spec){
 		circle = document.createElement('img');
 		/*circle.style.width = '50px';
 		circle.style.height = '50px';*/
 		circle.src = 'resources/img/' + (spec.src ||'circle.png');
-		circle.id = 'circle' + spec.i + spec.j || '';
 		circle.className = spec.className || '';
 		circle.draggable = false;
+		circle.setAttribute('value', spec.val);
 		//circle.style.position = 'absolute';
 		return circle;
 	}
@@ -26,7 +25,6 @@ window.onload = function(){
 		}
 		var newTd = function(i, j){
 			var td = document.createElement('td');
-			td.id = 'td'+i+j;
 			td.setAttribute('onmousedown', 'getMouse(this, event)');
 			td.row = i;
 			td.column = j;
@@ -34,22 +32,38 @@ window.onload = function(){
 			return td;
 		}
 
-		for(var i=0; i<5;i++){
-			var tr = newTr();
-			for (var j=0; j<5; j++){
-				var td = newTd(i, j);
-				var className = 'type-'+grid.pattern[i][j];
-				td.appendChild(newCircle({src: 'circle'+grid.pattern[i][j]+'.png', className: className,i: i, j: j}));
-				tr.appendChild(td);
+		grid.draw = function(){
+			for(var i=0; i<5;i++){
+				var tr = newTr();
+				for (var j=0; j<5; j++){
+					var td = newTd(i, j);
+					var className = 'type-'+grid.pattern[i][j];
+					td.appendChild(newCircle({src: 'circle'+grid.pattern[i][j]+'.png', className: className,i: i, j: j, val: grid.pattern[i][j]}));
+					tr.appendChild(td);
+				}
+				grid.appendChild(tr);
 			}
-			grid.appendChild(tr);
+			return grid;
 		}
+
+		grid.changePattern = function(spec){
+			grid.pattern = spec.pattern;
+			grid.innerHTML = "";
+			grid.draw();
+		}
+
+		grid.draw();	
 
 
 		return grid;
 
 	}
 
-	var map = newGrid({pattern: levelMap});
+	var map = newGrid({pattern: tmp.levelMap});
 	screen.appendChild(map);
+	//tmp.levelMap = [[1,1,1,1,1], [1,3,5,2,2], [2,1,2,4,4], [3,5,1,2,3], [1,5,2,1,4]];
+	map.changePattern({pattern: tmp.levelMap});
+
+
+
 }
