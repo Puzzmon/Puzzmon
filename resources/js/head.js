@@ -2,12 +2,21 @@ var pos = {};
 pos.row = {};
 pos.column = {};
 var tmp = {};
+var score = {};
+tmp.points = 0;
 tmp.src="";
 tmp.last="";
 tmp.row = -1;
 tmp.column = -1;
 time = 5;
-tmp.levelMap = [[1,2,3,5,4], [1,3,5,2,2], [2,1,2,4,4], [3,5,1,2,3], [1,5,2,1,4]];
+tmp.levelMap = [[0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0]];
+for (var i = 0; i<5; i++) {
+	for(var j = 0; j<5; j++){
+		tmp.levelMap[i][j] = Math.floor((Math.random() * 5) + 1);
+	}
+	
+}
+var map = {};
 
 function getMouse(object, event){
 	var cells = document.getElementsByTagName('td');
@@ -130,7 +139,7 @@ function moveDown(){
 	tmp.row++;
 }
 
-function checkGrid(){
+	function checkGrid(){
 	for (var i = 0; i<5; i++){
 		pos.row[i] = null;
 		var consecutive = 1;
@@ -162,13 +171,47 @@ function checkGrid(){
 						pos.column[j] = {i, j, consecutive};
 					}
 				}
+				else{
+					consecutive=1;
+				}	
 			}
 			
-			else{
-				consecutive=1;
-			}			
+		
 		}
 	}
 
-	console.log(pos);
+	//console.log(pos);
+
+	for (var i=0; i<5;i++){
+		//console.log(pos.row[i]);
+		if (pos.row[i]){
+			var j = pos.row[i].consecutive;
+			j--;
+			var x = pos.row[i].i;
+			var y = pos.row[i].j;
+			for (j; j>=0; j--){
+				tmp.points++;
+				tmp.levelMap[x][y-j] = Math.floor((Math.random() * 5) + 1);
+				map.changePattern({pattern: tmp.levelMap});
+				
+			}
+			checkGrid();
+		}
+		if (pos.column[i]){
+			var j = pos.column[i].consecutive;
+			j--;
+			var x = pos.column[i].i;
+			var y = pos.column[i].j;
+			//console.log(j, x, y);
+			for (j; j>=0; j--){
+				tmp.points++;
+				tmp.levelMap[x-j][y] = Math.floor((Math.random() * 5) + 1);
+				map.changePattern({pattern: tmp.levelMap});
+				
+			}
+			checkGrid();
+		}
+	}
+	score.innerHTML = "points: " + tmp.points;;
+	
 }

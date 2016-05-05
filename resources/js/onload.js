@@ -19,6 +19,7 @@ window.onload = function(){
 		grid.pattern = spec.pattern || [0];
 		/*grid.style.width = 50*5 + 'px';
 		grid.style.height = 50*5 + 'px';*/
+		grid.id="map";
 		var newTr = function(){
 			var tr = document.createElement('tr');
 			return tr;
@@ -59,11 +60,12 @@ window.onload = function(){
 
 	}
 
-	var map = newGrid({pattern: tmp.levelMap});
+	map = newGrid({pattern: tmp.levelMap});
 	screen.appendChild(map);
-	//tmp.levelMap = [[1,1,1,1,1], [1,3,5,2,2], [2,1,2,4,4], [3,5,1,2,3], [1,5,2,1,4]];
-	map.changePattern({pattern: tmp.levelMap});
-
-
+	checkGrid();
+	score = document.getElementById('points');
+	tmp.points=0;
+	score.innerHTML = "points: 0";
 
 }
+
