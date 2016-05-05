@@ -59,6 +59,11 @@ window.onload = function(){
 		return grid;
 
 	}
+	document.ondragstart = function(e) {
+		if (e.target.nodeName.toUpperCase() == "IMG") {
+	 		return false;
+		}
+	}
 
 	map = newGrid({pattern: tmp.levelMap});
 	screen.appendChild(map);
