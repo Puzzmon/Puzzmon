@@ -7,7 +7,7 @@ function connect(){
     $password = "Asdqwe123";
     $tablename = "u375670478_puzzm";
     */
-
+    
     $servername = "localhost";
     $username = "root";
     $password = "";

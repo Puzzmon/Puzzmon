@@ -20,8 +20,10 @@ session_start();
 		}
 		$row = $row->fetch_assoc();
 		$_SESSION['username'] = $row["Usuario"];
-		$_SESSION["passw"] = $row["Contraseña"];
-		$_SESSION["email"] = $row["Email"];
+		$_SESSION['passw'] = $row["Contraseña"];
+		$_SESSION['email'] = $row["Email"];
+		$_SESSION['exp'] = $row["Exp_actual"];
+		$_SESSION['nivel'] = $row["Nivel"];
 
 		header('Location: '.$_SERVER['HTTP_REFERER']);
 
