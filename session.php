@@ -19,6 +19,7 @@ session_start();
 		    echo "error";
 		}
 		$row = $row->fetch_assoc();
+		$_SESSION['id'] = $row["Id"];
 		$_SESSION['username'] = $row["Usuario"];
 		$_SESSION['passw'] = $row["Contraseña"];
 		$_SESSION['email'] = $row["Email"];

@@ -16,33 +16,7 @@ session_start();
 	<script src="resources/js/jquery.js"></script>
 	<script src="resources/js/bootstrap.js"></script>
     <script src="resources/js/bootstrap.min.js"></script>
-	<script type="text/javascript">
-	$(document).ready(function() {
-	    setTimeout(function() {
-	        $(".bienvenido").fadeOut(1500);
-	    },2000);
-	});
-	$(document).ready(function() {
-	    setTimeout(function() {
-	        $(".top").fadeIn(100);
-	    },3500);
-	});
-	function openlogin(){
-		document.getElementById('buttons').style.display = 'none';
-		document.getElementById('loggin').style.display = 'block';
-	}
-	function openregister(){
-		document.getElementById('buttons').style.display = 'none';
-		document.getElementById('register').style.display = 'block';
-	} 
-	function abrir_user() { 
-		document.getElementById('User').style.display = 'block';
-		}	
-	function cerrar_user(){
-		document.getElementById('User').style.display = 'none';	
-	}	
-	
-	</script>
+	<script src="resources/js/mijs.js"></script>
 	<title>PuzzMon</title>
 </head>
 <body>
@@ -67,9 +41,9 @@ session_start();
 			<p>Bienvenido, <b><?=$_SESSION["username"]?></b></p>
 		</div>
 		<div class='menu top' style="display:none">
-			<div id="top" class="col-md-3 border">Name:<b class="user" onclick="abrir_user()"> <?=$_SESSION["username"]?></b></div>
-			<div id="top" class="col-md-3 border"><b>Nivel: <?=$_SESSION["nivel"]?></b></div>
-			<div id="top" class="col-md-offset-3 col-md-3 border"><a href="cerrar_sesion.php">Log Out</a></div>
+			<div id="top" class="col-md-3 col-xs-3 border">Name:<b class="user" onclick="abrir_user()"> <?=$_SESSION["username"]?></b></div>
+			<div id="top" class="col-md-3 col-xs-3 border"><b>Nivel: <?=$_SESSION["nivel"]?></b></div>
+			<div id="top" class="col-md-offset-3 col-md-3 col-xs-offset-3 col-xs-3 border"><a href="cerrar_sesion.php">Log Out</a></div>
 		</div>
 	<?php		
 		}	
@@ -105,29 +79,40 @@ session_start();
 			<div class="fondotransparente">
 				<div class="fondoUser">
 					<div class="cerrar" onclick="cerrar_user()"></div>
-					<div class="User col-md-6">
+					<div class="User col-md-6 col-xs-6">
 						<b><?=$_SESSION["username"]?></b>
 						<hr>
-						<p>Nivel: <?=$_SESSION["nivel"]?>  EXP: <?=$_SESSION["exp"]?>/1000</p> <!-- CALCULAR LA EXPERIENCIA exp actual * 100% / exp nivel -->
-						<div class="progress progress-striped active">
-							<?php
-							$exp = $_SESSION["exp"];
-							$exp_total = '1000';
-							$porcentaje = ($exp * 100)/ $exp_total; 
+						<?php
+							include 'connection.php';
+							$conn = connect();
+							$sql = "SELECT Exp_actual FROM usuarios WHERE Id = 1;" or die('Error: ' . mysql_error());
+							$row = $conn->query($sql);
+							if ($row == false){
+								die(mysql_error());
+							}
+							$row = $row->fetch_assoc();
+							$exp = 
+							$exp_total = 1000;
+							$porcentaje = ($exp * 100 ) / $exp_total; 
+							
 							?>
-						  <div class="progress-bar" role="progressbar" style="width:<?php echo $porcentaje ?>%">
-						   <p style="text-align:center; color:black"><?=$porcentaje?>%<p>
+						<p>Nivel: <?=$_SESSION["nivel"]?>  EXP: <span id="Userexp"></span>/<span id="Userexptotal"></span></p> <!-- CALCULAR LA EXPERIENCIA exp actual * 100% / exp nivel -->
+						<div class="progress progress-striped active">
+
+						  <div id="barraExp" class="progress-bar progress-bar-custom" role="progressbar" >
+						  	 
+						   <p id="barraExptext" style="text-align:center; color:black">%<p>
 						  </div>
 						</div>
 					</div>
-					<div>
+					<div class="UserIcon col-md-6 col-xs-6">
+						<img src="resources/img/iconuser_1.png"></img>
 					</div>
-					<div class="Mascota col-md-12">
-						<p>nombre Mascota</p>
+					<div class="Estadisticas col-md-12">
+						<b>Estadisticas</b>
 						<hr>
-						<p>Clase</p>
-						<hr>
-						<p>estados/nivel</p>
+						<p>Poder : 100</p>
+						<p>Defensa : 50</p>
 					</div> 
 				</div>	
 			</div>

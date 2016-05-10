@@ -1,3 +1,7 @@
+<?php
+// Start the session
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +26,7 @@
 						<p>Nivel: <?=$_SESSION["nivel"]?>  EXP: <?=$_SESSION["exp"]?>/1000</p> <!-- CALCULAR LA EXPERIENCIA exp actual * 100% / exp nivel -->
 						<div class="progress progress-striped active">
 							<?php
-							$exp = $_SESSION["exp"];
+							$exp = experiencia();
 							$exp_total = '1000';
 							$porcentaje = ($exp * 100)/ $exp_total; 
 							?>
