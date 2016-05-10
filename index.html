@@ -8,7 +8,12 @@
 	
 <body>
 	<style>
-		body{background-color: pink;
+		html{
+			height: 100%;
+		}
+		body{
+			height: 100%;
+			background-color: pink;
 			-webkit-touch-callout: none;
 		    -webkit-user-select: none;
 		    -khtml-user-select: none;
@@ -16,13 +21,17 @@
 		    -ms-user-select: none;
 		    user-select: none;}
 		#game{
+			height: 100%;
+
 			
 		}
 		#battle{
+			height: 40%;
+			border: 1px solid red;
 			
 		}
 		#grid{
-			
+			height: 50%;
 		}
 		#points{
 			text-align: center;
@@ -30,10 +39,10 @@
 	</style>
 	<div id="game">
 		<div id="battle">
-			<p id="points">points: 0</p>
 		</div>
 		<div id="grid"></div>
 	</div>
 <script src="resources/js/onload.js"></script>
+
 </body>
 </html>

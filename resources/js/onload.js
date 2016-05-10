@@ -67,10 +67,38 @@ window.onload = function(){
 
 	map = newGrid({pattern: tmp.levelMap});
 	screen.appendChild(map);
+	
+
+	var screen = document.getElementById('battle');
+
+	var newCharacter = function(spec){
+		var character = document.createElement('div');
+		character.name = spec.name;
+		character.style.width= '100px';
+		character.style.height = '100px';
+		character.style.border = '1px solid blue';
+		//character.style.display = 'inline';
+		character.maxHP = spec.maxHP || 100;
+		character.currentHP = spec.currentHP || 100;
+		character.innerHTML = character.name + ': ' + character.currentHP + ' / ' + character.maxHP;
+		character.update = function(spec){
+			character.currentHP = spec.currentHP;
+			character.innerHTML = character.name + ': ' + character.currentHP + ' / ' + character.maxHP;
+			if (character.currentHP <=0)
+				character.innerHTML = 'DEAD';
+			return character;
+		}
+
+		return character;
+	}
+	enemy = newCharacter({name: 'Enemy'});
+	you = newCharacter({maxHP: 20, currentHP: 20, name: 'You'});
+	screen.appendChild(enemy);
+	screen.appendChild(you);
 	checkGrid();
-	score = document.getElementById('points');
+	you.update({currentHP: 20});
+	enemy.update({currentHP: 100});
 	tmp.points=0;
-	score.innerHTML = "points: 0";
 
 }
 

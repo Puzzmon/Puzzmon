@@ -9,6 +9,8 @@ tmp.last="";
 tmp.row = -1;
 tmp.column = -1;
 time = 5;
+tmp.move = 0;
+tmp.combo = 0;
 tmp.levelMap = [[0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0]];
 for (var i = 0; i<5; i++) {
 	for(var j = 0; j<5; j++){
@@ -17,6 +19,8 @@ for (var i = 0; i<5; i++) {
 	
 }
 var map = {};
+var enemy = {};
+var you = {};
 
 function getMouse(object, event){
 	var cells = document.getElementsByTagName('td');
@@ -46,6 +50,9 @@ function getMouse(object, event){
 			}	
 		}
 		checkGrid();
+		if(tmp.move > 0)
+			you.update({currentHP: you.currentHP - 1});
+		tmp.move=0;
 
 	}
 }
@@ -53,6 +60,7 @@ function decolor(object){
 	object.style.backgroundColor = "";
 }
 function transfer(object){
+	tmp.move++;
 	row = document.getElementsByClassName ('row-' + tmp.row);
 	column = document.getElementsByClassName ('column-' + tmp.column);
 	for (var i= 0; i<row.length; i++){
@@ -148,7 +156,8 @@ function moveDown(){
 				if (tmp.levelMap[i][j] == tmp.levelMap[i][j-1]){
 				consecutive++;
 					if (consecutive >= 3){
-						pos.row[i] = {i,j, consecutive};
+						var value = tmp.levelMap[i][j];
+						pos.row[i] = {i,j, consecutive, value};
 						//console.log(pos.row);
 					}
 				}
@@ -168,7 +177,8 @@ function moveDown(){
 				if (tmp.levelMap[i][j] == tmp.levelMap[i-1][j]){
 					consecutive++;
 					if (consecutive >= 3){
-						pos.column[j] = {i, j, consecutive};
+						var value = tmp.levelMap[i][j];
+						pos.column[j] = {i, j, consecutive, value};
 					}
 				}
 				else{
@@ -189,15 +199,17 @@ function moveDown(){
 			j--;
 			var x = pos.row[i].i;
 			var y = pos.row[i].j;
+			console.log(pos.row[i]);
 			for (j; j>=0; j--){
 				tmp.points++;
 				tmp.levelMap[x][y-j] = Math.floor((Math.random() * 5) + 1);
 				map.changePattern({pattern: tmp.levelMap});
 				
 			}
-			checkGrid();
+			tmp.combo++;
 		}
 		if (pos.column[i]){
+			console.log(pos.column[i]);
 			var j = pos.column[i].consecutive;
 			j--;
 			var x = pos.column[i].i;
@@ -209,9 +221,15 @@ function moveDown(){
 				map.changePattern({pattern: tmp.levelMap});
 				
 			}
-			checkGrid();
+			tmp.combo++;
 		}
 	}
-	score.innerHTML = "points: " + tmp.points;;
+	if (tmp.combo>0){
+		tmp.combo = 0;
+		checkGrid();
+	}
+		
+	enemy.update({currentHP: enemy.maxHP - tmp.points});
+
 	
 }
