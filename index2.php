@@ -41,13 +41,16 @@ session_start();
 			<p>Bienvenido, <b><?=$_SESSION["username"]?></b></p>
 		</div>
 		<div class='menu top' style="display:none">
-			<div id="top" class="col-md-3 col-xs-3 border">Name:<b class="user" onclick="abrir_user()"> <?=$_SESSION["username"]?></b></div>
+			<div id="top" class="col-md-3 col-xs-3 border"><b class="user" onclick="abrir_user()"> <?=$_SESSION["username"]?></b></div>
 			<div id="top" class="col-md-3 col-xs-3 border"><b>Nivel: <?=$_SESSION["nivel"]?></b></div>
 			<div id="top" class="col-md-offset-3 col-md-3 col-xs-offset-3 col-xs-3 border"><a href="cerrar_sesion.php">Log Out</a></div>
 		</div>
 	<?php		
 		}	
 		?>
+		<div id="puzzmon" class="col-md-offset-4 col-md-3">
+			<a href="index.html"><img class="puzzmon" src="resources/img/puzzmon1.png"/></a>
+		</div>
 		<div id='loggin' style='display:none'>
 			<form id='form' name='form' action='session.php' method='post'>
 				<div id='block'>
@@ -117,6 +120,7 @@ session_start();
 				</div>	
 			</div>
 		</div>
+
 
 	
 </body>

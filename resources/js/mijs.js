@@ -29,7 +29,7 @@ $(document).ready(function() {
 	     		document.getElementById("barraExptext").innerHTML = Porcentaje+'%';
 	    		}
 	  		};
-	  xhttp.open("GET", "db_Functions.php", true);
+	  xhttp.open("GET", "DB_Functions.php", true);
 	  xhttp.send();
 	
 		}

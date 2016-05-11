@@ -155,9 +155,25 @@ h1 {
 	border:2px solid white;
 	height:100%;
 }
+#loggin{
+	position:relative;
+	top:250px;
+}
+#register{
+	position:relative;
+	top:250px;
+}
 .UserIcon
 {
 	/* Hacer algo */
 }
 .progress {background: rgba(255, 255, 255, 1); background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%); background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%); border: 0px solid rgba(255, 255, 255, 1); border-radius: 4px; height: 20px;}
 .progress-bar-custom {background: rgba(140, 33, 148, 1);}
+#puzzmon{
+	position:fixed;
+	z-index:-1;
+}
+.puzzmon{
+	height:200px;
+	z-index:-1;
+}
