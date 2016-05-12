@@ -1,3 +1,5 @@
+
+
 var pos = {};
 pos.row = {};
 pos.column = {};
@@ -11,6 +13,7 @@ tmp.column = -1;
 time = 5;
 tmp.move = 0;
 tmp.combo = 0;
+/* 1 = planta, 2 = fuego, 3 = agua, 4 = rayo, 5 = viento */ 
 tmp.levelMap = [[0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0]];
 for (var i = 0; i<5; i++) {
 	for(var j = 0; j<5; j++){
@@ -21,6 +24,12 @@ for (var i = 0; i<5; i++) {
 var map = {};
 var enemy = {};
 var you = {};
+
+var waterDamage = 0;
+var fireDamage = 0;
+var grassDamage = 0;
+var elecDamage = 0;
+var windDamage = 0;
 
 function getMouse(object, event){
 	var cells = document.getElementsByTagName('td');
@@ -147,7 +156,78 @@ function moveDown(){
 	tmp.row++;
 }
 
-	function checkGrid(){
+function checkEffectivity(spec){
+/* 1 = planta, 2 = fuego, 3 = agua, 4 = rayo, 5 = viento */ 
+	switch (spec.damageType){
+		case 1:
+			switch (spec.enemyType){
+				case 1: return 1; break;
+				case 2: return 0.5; break;
+				case 3: return 2; break;
+				case 4: return 2; break;
+				case 5: return 0.5; break;
+			}
+		break;
+		case 2:
+			switch (spec.enemyType){
+				case 1: return 2; break;
+				case 2: return 1; break;
+				case 3: return 0.5; break;
+				case 4: return 2; break;
+				case 5: return 0.5; break;
+			}
+		break;
+		case 3:
+			switch (spec.enemyType){
+				case 1: return 0.5; break;
+				case 2: return 2; break;
+				case 3: return 1; break;
+				case 4: return 0.5; break;
+				case 5: return 2; break;
+			}
+		break;
+		case 4:
+			switch (spec.enemyType){
+				case 1: return 0.5; break;
+				case 2: return 0.5; break;
+				case 3: return 2; break;
+				case 4: return 1; break;
+				case 5: return 2; break;
+			}
+		break;
+		case 5:
+			switch (spec.enemyType){
+				case 1: return 2; break;
+				case 2: return 2; break;
+				case 3: return 0.5; break;
+				case 4: return 0.5; break;
+				case 5: return 1; break;
+			}
+		break;
+	}
+}
+
+function checkBoost(spec){
+	if (spec.damageType == spec.characterType)
+		return 1.5;
+	else
+		return 1;
+}
+
+function checkDamage(spec){
+	grassDamage*= checkBoost({characterType: spec.characterType, damageType: 1}) * checkEffectivity({enemyType: spec.enemyType, damageType: 1});
+	fireDamage*= checkBoost({characterType: spec.characterType, damageType: 2}) * checkEffectivity({enemyType: spec.enemyType, damageType: 2});
+	waterDamage*= checkBoost({characterType: spec.characterType, damageType: 3}) * checkEffectivity({enemyType: spec.enemyType, damageType: 3});
+	elecDamage*= checkBoost({characterType: spec.characterType, damageType: 4}) * checkEffectivity({enemyType: spec.enemyType, damageType: 4});
+	windDamage*= checkBoost({characterType: spec.characterType, damageType: 5}) * checkEffectivity({enemyType: spec.enemyType, damageType: 5});
+
+	var totalDamage = grassDamage + fireDamage + waterDamage + elecDamage + windDamage;
+	totalDamage = Math.ceil(totalDamage);
+	return totalDamage;
+
+}
+
+function checkGrid(){
 	for (var i = 0; i<5; i++){
 		pos.row[i] = null;
 		var consecutive = 1;
@@ -201,7 +281,18 @@ function moveDown(){
 			var y = pos.row[i].j;
 			console.log(pos.row[i]);
 			for (j; j>=0; j--){
-				tmp.points++;
+				switch (pos.row[i].value){
+					case 1: grassDamage++; break;
+					case 2: fireDamage++; break;
+					case 3: waterDamage++; break;
+					case 4: elecDamage++; break;
+					case 5: windDamage++; break;
+					case "1": grassDamage++; break;
+					case "2": fireDamage++; break;
+					case "3": waterDamage++; break;
+					case "4": elecDamage++; break;
+					case "5": windDamage++; break;
+				}
 				tmp.levelMap[x][y-j] = Math.floor((Math.random() * 5) + 1);
 				map.changePattern({pattern: tmp.levelMap});
 				
@@ -216,7 +307,18 @@ function moveDown(){
 			var y = pos.column[i].j;
 			//console.log(j, x, y);
 			for (j; j>=0; j--){
-				tmp.points++;
+				switch (pos.column[i].value){
+					case 1: grassDamage++; break;
+					case 2: fireDamage++; break;
+					case 3: waterDamage++; break;
+					case 4: elecDamage++; break;
+					case 5: windDamage++; break;
+					case "1": grassDamage++; break;
+					case "2": fireDamage++; break;
+					case "3": waterDamage++; break;
+					case "4": elecDamage++; break;
+					case "5": windDamage++; break;
+				}
 				tmp.levelMap[x-j][y] = Math.floor((Math.random() * 5) + 1);
 				map.changePattern({pattern: tmp.levelMap});
 				
@@ -228,8 +330,13 @@ function moveDown(){
 		tmp.combo = 0;
 		checkGrid();
 	}
-		
-	enemy.update({currentHP: enemy.maxHP - tmp.points});
 
-	
+	var damage = checkDamage({characterType: you.type, enemyType: enemy.type});
+	console.log('Total Damage: '+ damage + ', grass: ' + grassDamage + ', fire: ' + fireDamage + ', water: ' + waterDamage + ', electric: ' + elecDamage + ', wind: ' + windDamage);
+	enemy.update({currentHP: enemy.currentHP - damage});
+	waterDamage = 0;
+	fireDamage = 0;
+	grassDamage = 0;
+	elecDamage = 0;
+	windDamage = 0;
 }
