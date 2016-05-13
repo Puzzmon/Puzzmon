@@ -73,17 +73,28 @@ window.onload = function(){
 
 	var newCharacter = function(spec){
 		var character = document.createElement('div');
+		character.className = spec.className || 'enemy';
 		character.name = spec.name;
 		character.style.width= '100px';
 		character.style.height = '100px';
 		character.style.border = '1px solid blue';
+		character.type = spec.type || 1;
+		character.attack = spec.attack || 10;
+		character.defense = spec.defense || 10;
+		switch (character.type){
+			case 1: character.typeName = 'grass'; break;
+			case 2: character.typeName = 'fire'; break;
+			case 3: character.typeName = 'water'; break;
+			case 4: character.typeName = 'electric'; break;
+			case 5: character.typeName = 'wind'; break;
+		}
 		//character.style.display = 'inline';
 		character.maxHP = spec.maxHP || 100;
 		character.currentHP = spec.currentHP || 100;
 		character.innerHTML = character.name + ': ' + character.currentHP + ' / ' + character.maxHP;
 		character.update = function(spec){
 			character.currentHP = spec.currentHP;
-			character.innerHTML = character.name + ': ' + character.currentHP + ' / ' + character.maxHP;
+			character.innerHTML = character.name + '('+character.typeName+'): ' + character.currentHP + ' / ' + character.maxHP;
 			if (character.currentHP <=0)
 				character.innerHTML = 'DEAD';
 			return character;
@@ -92,13 +103,15 @@ window.onload = function(){
 		return character;
 	}
 	enemy = newCharacter({name: 'Enemy'});
-	you = newCharacter({maxHP: 20, currentHP: 20, name: 'You'});
+	you = newCharacter({maxHP: 20, currentHP: 20, name: 'You', className: 'you', type: 2});
 	screen.appendChild(enemy);
 	screen.appendChild(you);
 	checkGrid();
 	you.update({currentHP: 20});
 	enemy.update({currentHP: 100});
 	tmp.points=0;
+	//(ataque * ((1+(n-3)/4) * resistencia * bonificación) - defensa);
+	console.log((5 * (1+(3-3)/4) * 2* 1.5) - 5);
 
 }
 
