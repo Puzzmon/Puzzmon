@@ -3,15 +3,29 @@
 session_start();
 ?>
 <?php 
+
+
+	function createUser ($us, $pwd, $mail){
+	include "connection.php";
+
+	$conn = connect();
+	$sql = "INSERT INTO usuarios values (NULL,'".$us."', '".$pwd."', '".$mail."', '0', '1');";
+        if ($conn->query($sql) === TRUE) {
+    return true;
+        } else {
+            return false;
+        }
+        $conn->close();
+
+	}
+	if(createUser($_POST["username"],$_POST["password"],$_POST["email"]))
+	{
 	session_unset();
-
-	if (isset($_POST["logg"])){
-
+		$conn = connect();
 		$user = $_POST["username"];
 		$pass = $_POST["password"];
 		//echo $user . " " . $pass;
-		include "connection.php";
-		$conn = connect();
+	
 		$sql = "SELECT * FROM usuarios WHERE Usuario = '".$user."'  AND Contraseña = '".$pass."';";
 		$row = $conn->query($sql);
 		if($row === FALSE) { 
@@ -41,7 +55,4 @@ session_start();
 	
 	}
 
-	else if (isset($_POST["logg2"])){
-		header('location: registro');
-	}
 ?>

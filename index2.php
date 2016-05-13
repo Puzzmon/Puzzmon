@@ -17,6 +17,7 @@ session_start();
 	<script src="resources/js/bootstrap.js"></script>
     <script src="resources/js/bootstrap.min.js"></script>
 	<script src="resources/js/mijs.js"></script>
+	<script src="resources/js/validar.js"></script>
 	<title>PuzzMon</title>
 </head>
 <body>
@@ -58,6 +59,7 @@ session_start();
 					<input type='text' name='username' id='name' placeholder='Username' required/>
 					<label id='pass' for='password'>k</label>
 					<input type='password' name='password' id='password' placeholder='Password' required/>
+					<label class="atras" onclick="closelogin()">x</label>
 					<input type='submit' id='submit' name='logg' value='a'/>
 				</div>
 			</form>
@@ -66,14 +68,18 @@ session_start();
 			</div>
 		</div>
 		<div id='register' style='display:none'>
-			<form id='form' name='form' action='register.php' method='post'>
+			<form id='form' name='form' action='register.php' method='post' onsubmit="return validar(), okregister();">
 				<div id='block2'>
 					<label id='user' for='name'>p</label>
-					<input type='text' name='username' id='name' placeholder='Username' required/>
+					<input type='text' name='username' id='username' placeholder='Username' required/>
+					<p id='usererror' class="erroruser">*</p>
 					<label id='pass' for='password'>k</label>
-					<input type='password' name='password' id='password' placeholder='Password' required/>
+					<input type='password' name='password' id='passwd' placeholder='Password' required/>
+					<p id='passerror' class="errorpw">*</p>
 					<label id='email' for='email'>p</label>
-					<input type='text' name='email' id='name' placeholder='Email' required/>
+					<input type='text' name='email' id='mail' placeholder='Email' required/>
+					<p id='emailerror' class="erroremail">*</p>
+					<label class="atras" onclick="closeregister()">x</label>
 					<input type='submit' id='submit' name='logg' value='a'/>
 				</div>
 			</form>
@@ -94,8 +100,8 @@ session_start();
 								die(mysql_error());
 							}
 							$row = $row->fetch_assoc();
-							$exp = 
-							$exp_total = 1000;
+							$exp = $_SESSION['exp'];
+							$exp_total = $_SESSION['Exp_total'];
 							$porcentaje = ($exp * 100 ) / $exp_total; 
 							
 							?>
@@ -120,6 +126,21 @@ session_start();
 				</div>	
 			</div>
 		</div>
+	<!--	
+		<div id="okRegister">
+			<div class="fondotransparente">
+				<div class="fondoUser">
+					<div class="cerrar" onclick="cerrar_okregister()"></div>
+					<div class="col-md-12 col-xs-6">
+						<h3>Gracias por registrarte</h3>
+						<p><b>Usuario:</b></p>
+						<p><b>Email:</b></p>	
+					</div>
+					
+				</div>	
+			</div>
+		</div>
+	-->
 
 
 	

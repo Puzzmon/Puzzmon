@@ -177,3 +177,30 @@ h1 {
 	height:200px;
 	z-index:-1;
 }
+.atras:hover{
+	cursor:pointer;
+}
+#block2 label.atras{
+	bottom:0;
+}
+p.erroruser{
+	position:absolute;
+	top:10px;
+	margin:5px;
+	color:red;
+	display:none;
+}
+p.errorpw{
+	position:absolute;
+	top:50px;
+	margin:5px;
+	color:red;
+	display:none;
+}
+p.erroremail{
+	position:absolute;
+	top:90px;
+	margin:5px;
+	color:red;
+	display:none;
+}
