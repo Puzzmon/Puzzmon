@@ -28,6 +28,7 @@ session_start();
 		if (empty($_SESSION["username"]))
 		{
 	?>
+		<!-- DIV DE BOTONES -->
 			<div id="buttons"> 
 			<button class="btnlog" onclick="openlogin()">Log In</button>
 			<button class="btnregister" onclick="openregister()">Register</button> 
@@ -38,9 +39,11 @@ session_start();
 		else
 		{
 	?>	
+		<!-- DIV TOP -->
 		<div class='menu bienvenido'>
 			<p>Bienvenido, <b><?=$_SESSION["username"]?></b></p>
 		</div>
+		<!-- DIV TOP -->
 		<div class='menu top' style="display:none">
 			<div id="top" class="col-md-3 col-xs-3 border"><b class="user" onclick="abrir_user()"> <?=$_SESSION["username"]?></b></div>
 			<div id="top" class="col-md-3 col-xs-3 border"><b>Nivel: <?=$_SESSION["nivel"]?></b></div>
@@ -50,8 +53,9 @@ session_start();
 		}	
 		?>
 		<div id="puzzmon" class="col-md-offset-4 col-md-3">
-			<a href="index.html"><img class="puzzmon" src="resources/img/puzzmon1.png"/></a>
+			<a href="index.html"><img class="puzzmon" src="resources/img/puzzmon2.png"/></a>
 		</div>
+		<!-- DIV DE LOGGIN -->
 		<div id='loggin' style='display:none'>
 			<form id='form' name='form' action='session.php' method='post'>
 				<div id='block'>
@@ -67,6 +71,7 @@ session_start();
 				<a href='#'>forgot?</a>
 			</div>
 		</div>
+		<!-- DIV DE REGISTRO -->
 		<div id='register' style='display:none'>
 			<form id='form' name='form' action='register.php' method='post' onsubmit="return validar(), okregister();">
 				<div id='block2'>
@@ -92,6 +97,7 @@ session_start();
 				</div>
 			</form>
 		</div>
+		<!-- DIV DE USUARIO -->
 		<div id="User">
 			<div class="fondotransparente">
 				<div class="fondoUser">
@@ -132,6 +138,33 @@ session_start();
 						<p>Defensa : 50</p>
 					</div> 
 				</div>	
+			</div>
+		</div>
+		<!-- DIV DE NIVELES DE MAPAS -->
+		<div id="nivelmapas" class="col-md-3 col-xs-11 ">
+			<div class="fondoniveles">
+				<div id="niveles" class="niveles">
+					<div id="nivel5" class="nivel col-md-12">
+						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel5.png" /></div>
+						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star5.png" /></div>
+					</div>
+					<div id="nivel4" class="nivel col-md-12">
+						<div class="center right col-md-6 img"><img src="resources/img/Monsters/75x75/nivel4.png" /></div>
+						<div class="center left col-md-6 img"><img class="center" src="resources/img/Monsters/star4.png" /></div>
+					</div>
+					<div id="nivel3" class="nivel col-md-12">
+						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel3.png" /></div>
+						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star3.png" /></div>
+					</div>
+					<div id="nivel2" class="nivel col-md-12">
+						<div class="center right col-md-6 img"><img src="resources/img/Monsters/75x75/nivel2.png" /></div>
+						<div class="center left col-md-6 img"><img class="center" src="resources/img/Monsters/star2.png" /></div>
+					</div>
+					<div id="nivel1" class="nivel col-md-12">
+						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel1.png" /></div>
+						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star1.png" /></div>
+					</div>
+				</div>
 			</div>
 		</div>
 </body>

@@ -204,3 +204,46 @@ p.erroremail{
 	color:red;
 	display:none;
 }
+#nivelmapas{
+	border: 10px solid transparent; 
+    border-image: url(bplat.png) 30 stretch; 
+	position:absolute;
+	margin:10px;
+	height:85%;
+	padding:10px;
+}
+.fondoniveles{
+	position:relative;
+	height:100%;
+	width:100%;
+	background-color: rgba(220, 60, 20, 0.9);
+	border:1px solid #808080;
+	border-radius: 10px;
+	padding:10px;
+}
+.niveles{
+	height:100%;
+	position:relative;
+}
+.nivel{
+	border-bottom: 1px solid white;
+	position:relative;
+	height:20%;
+}
+.left{
+	float:left;
+	padding: 5px;
+}
+.right{
+	float:right;
+	padding: 5px;
+}
+#niveles div.center{
+	display:inline-block;
+	vertical-align:middle;
+	height:100%;
+}
+#niveles img.center{
+  display:block;
+  margin: 15px;
+}
