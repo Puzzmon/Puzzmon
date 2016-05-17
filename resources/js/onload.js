@@ -74,13 +74,20 @@ window.onload = function(){
 	var newCharacter = function(spec){
 		var character = document.createElement('div');
 		character.className = spec.className || 'enemy';
+		if (character.className == 'enemy'){
+			character.setAttribute('onclick', 'selectEnemy(this)');
+			//character.style.display = 'inline';
+		}
 		character.name = spec.name;
 		character.style.width= '100px';
 		character.style.height = '100px';
-		character.style.border = '1px solid blue';
+		character.style.border = '3px solid black';
 		character.type = spec.type || 1;
 		character.attack = spec.attack || 10;
 		character.defense = spec.defense || 10;
+		character.style.backgroundImage = 'url("resources/img/' + spec.bg + '")';
+		character.style.float = 'left';
+		character.style.margin= '5px';
 		switch (character.type){
 			case 1: character.typeName = 'grass'; break;
 			case 2: character.typeName = 'fire'; break;
@@ -88,10 +95,9 @@ window.onload = function(){
 			case 4: character.typeName = 'electric'; break;
 			case 5: character.typeName = 'wind'; break;
 		}
-		//character.style.display = 'inline';
 		character.maxHP = spec.maxHP || 100;
-		character.currentHP = spec.currentHP || 100;
-		character.innerHTML = character.name + ': ' + character.currentHP + ' / ' + character.maxHP;
+		character.currentHP = spec.currentHP || character.maxHP;
+		character.innerHTML = character.name + '('+character.typeName+'): ' + character.currentHP + ' / ' + character.maxHP;
 		character.update = function(spec){
 			character.currentHP = spec.currentHP;
 			character.innerHTML = character.name + '('+character.typeName+'): ' + character.currentHP + ' / ' + character.maxHP;
@@ -102,16 +108,23 @@ window.onload = function(){
 
 		return character;
 	}
-	enemy = newCharacter({name: 'Enemy'});
-	you = newCharacter({maxHP: 20, currentHP: 20, name: 'You', className: 'you', type: 2});
-	screen.appendChild(enemy);
+	/*newCharacter({name: 'Enemy', bg: 'pet1.png', className: 'enemy'});
+	newCharacter({name: 'Enemy', bg: 'pet1.png', className: 'enemy'});*/
+	you = newCharacter({maxHP: 20, currentHP: 20, name: 'You', className: 'you', type: 2, attack: 14, bg: 'pet2.png'});
+	screen.appendChild(newCharacter({name: 'Enemy', bg: 'pet3.png',maxHP: 77, type: 3, defense: 8, className: 'enemy'}));
+	screen.appendChild(newCharacter({name: 'Enemy', bg: 'pet1.png', maxHP: 69, type: 1, className: 'enemy'}));
+	screen.appendChild(newCharacter({name: 'Enemy', bg: 'pet5.png', maxHP: 66, type: 5, className: 'enemy'}));
+	selectEnemy(document.getElementsByClassName('enemy')[0]);
+	enemyList = document.getElementsByClassName('enemy');
 	screen.appendChild(you);
 	checkGrid();
 	you.update({currentHP: 20});
-	enemy.update({currentHP: 100});
+	for(var i = 0; i < enemyList.length; i++){
+		enemyList[i].update({currentHP: enemyList[i].maxHP});
+	}
+	
 	tmp.points=0;
 	//(ataque * ((1+(n-3)/4) * resistencia * bonificación) - defensa);
-	console.log((5 * (1+(3-3)/4) * 2* 1.5) - 5);
+	console.log((10 * (1+(3-3)/4) * 2* 1.5) - 10);
 
 }
-

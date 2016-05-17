@@ -1,5 +1,5 @@
 
-
+var enemyList = {};
 var pos = {};
 pos.row = {};
 pos.column = {};
@@ -30,6 +30,14 @@ var fireDamage = 0;
 var grassDamage = 0;
 var elecDamage = 0;
 var windDamage = 0;
+
+function selectEnemy(object){
+	for(var i = 0; i<enemyList.length; i++){
+		enemyList[i].style.border = '3px solid black';
+	}
+	enemy=object;
+	enemy.style.border =  '3px solid blue';
+}
 
 function getMouse(object, event){
 	var cells = document.getElementsByTagName('td');
@@ -162,45 +170,45 @@ function checkEffectivity(spec){
 		case 1:
 			switch (spec.enemyType){
 				case 1: return 1; break;
-				case 2: return 0.5; break;
-				case 3: return 2; break;
-				case 4: return 2; break;
-				case 5: return 0.5; break;
+				case 2: return 0.75; break;
+				case 3: return 1.5; break;
+				case 4: return 1.5; break;
+				case 5: return 0.75; break;
 			}
 		break;
 		case 2:
 			switch (spec.enemyType){
-				case 1: return 2; break;
+				case 1: return 1.5; break;
 				case 2: return 1; break;
-				case 3: return 0.5; break;
-				case 4: return 2; break;
-				case 5: return 0.5; break;
+				case 3: return 0.75; break;
+				case 4: return 1.5; break;
+				case 5: return 0.75; break;
 			}
 		break;
 		case 3:
 			switch (spec.enemyType){
-				case 1: return 0.5; break;
-				case 2: return 2; break;
+				case 1: return 0.75; break;
+				case 2: return 1.5; break;
 				case 3: return 1; break;
-				case 4: return 0.5; break;
-				case 5: return 2; break;
+				case 4: return 0.75; break;
+				case 5: return 1.5; break;
 			}
 		break;
 		case 4:
 			switch (spec.enemyType){
-				case 1: return 0.5; break;
-				case 2: return 0.5; break;
-				case 3: return 2; break;
+				case 1: return 0.75; break;
+				case 2: return 0.75; break;
+				case 3: return 1.5; break;
 				case 4: return 1; break;
-				case 5: return 2; break;
+				case 5: return 1.5; break;
 			}
 		break;
 		case 5:
 			switch (spec.enemyType){
-				case 1: return 2; break;
-				case 2: return 2; break;
-				case 3: return 0.5; break;
-				case 4: return 0.5; break;
+				case 1: return 1.5; break;
+				case 2: return 1.5; break;
+				case 3: return 0.75; break;
+				case 4: return 0.75; break;
 				case 5: return 1; break;
 			}
 		break;
@@ -209,20 +217,34 @@ function checkEffectivity(spec){
 
 function checkBoost(spec){
 	if (spec.damageType == spec.characterType)
-		return 1.5;
+		return 1.25;
 	else
 		return 1;
 }
 
 function checkDamage(spec){
-	grassDamage*= checkBoost({characterType: spec.characterType, damageType: 1}) * checkEffectivity({enemyType: spec.enemyType, damageType: 1});
-	fireDamage*= checkBoost({characterType: spec.characterType, damageType: 2}) * checkEffectivity({enemyType: spec.enemyType, damageType: 2});
-	waterDamage*= checkBoost({characterType: spec.characterType, damageType: 3}) * checkEffectivity({enemyType: spec.enemyType, damageType: 3});
-	elecDamage*= checkBoost({characterType: spec.characterType, damageType: 4}) * checkEffectivity({enemyType: spec.enemyType, damageType: 4});
-	windDamage*= checkBoost({characterType: spec.characterType, damageType: 5}) * checkEffectivity({enemyType: spec.enemyType, damageType: 5});
+
+	grassDamage= (spec.characterAttack * (1 + (grassDamage - 3) / 4) * checkBoost({characterType: spec.characterType, damageType: 1}) * checkEffectivity({enemyType: spec.enemyType, damageType: 1})) -spec.enemyDefense;
+	fireDamage= (spec.characterAttack * (1 + (fireDamage - 3) / 4) * checkBoost({characterType: spec.characterType, damageType: 2}) * checkEffectivity({enemyType: spec.enemyType, damageType: 2})) -spec.enemyDefense;
+	waterDamage= (spec.characterAttack * (1 + (waterDamage - 3) / 4) * checkBoost({characterType: spec.characterType, damageType: 3}) * checkEffectivity({enemyType: spec.enemyType, damageType: 3})) -spec.enemyDefense;
+	elecDamage= (spec.characterAttack * (1 + (elecDamage - 3) / 4) * checkBoost({characterType: spec.characterType, damageType: 4}) * checkEffectivity({enemyType: spec.enemyType, damageType: 4})) -spec.enemyDefense;
+	windDamage= (spec.characterAttack * (1 + (windDamage - 3) / 4) * checkBoost({characterType: spec.characterType, damageType: 5}) * checkEffectivity({enemyType: spec.enemyType, damageType: 5})) -spec.enemyDefense;
+
+	if(grassDamage <= 0)
+		grassDamage = 0;
+	if(fireDamage <= 0)
+		fireDamage = 0;
+	if(waterDamage <= 0)
+		waterDamage = 0;
+	if(elecDamage <= 0)
+		elecDamage = 0;
+	if(windDamage <= 0)
+		windDamage = 0;
+
 
 	var totalDamage = grassDamage + fireDamage + waterDamage + elecDamage + windDamage;
 	totalDamage = Math.ceil(totalDamage);
+
 	return totalDamage;
 
 }
@@ -331,7 +353,7 @@ function checkGrid(){
 		checkGrid();
 	}
 
-	var damage = checkDamage({characterType: you.type, enemyType: enemy.type});
+	var damage = checkDamage({characterAttack: you.attack, enemyDefense: enemy.defense, characterType: you.type, enemyType: enemy.type});
 	console.log('Total Damage: '+ damage + ', grass: ' + grassDamage + ', fire: ' + fireDamage + ', water: ' + waterDamage + ', electric: ' + elecDamage + ', wind: ' + windDamage);
 	enemy.update({currentHP: enemy.currentHP - damage});
 	waterDamage = 0;
