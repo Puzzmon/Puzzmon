@@ -13,7 +13,7 @@
 }
 #block2,#option{
 	width:230px;
-	height:180px;
+	height:220px;
 	margin:auto;
 }
 #block,#block2{
@@ -42,6 +42,21 @@
 	border-top-left-radius:2px;
 	border-bottom-left-radius:2px;
 }
+#block2 label.tipo{
+	margin-top:0px;
+}
+#block2 select{
+	width:156px;
+	height:30px;
+	margin:15px;
+	border:0;
+	border-radius:2px;
+	outline:0;
+	display:block;
+	font-size:18px;
+	padding-left: 35px;
+}
+
 #block label#pass,#block2 label#pass{
 	position:absolute;
 	width:30px;

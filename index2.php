@@ -79,6 +79,14 @@ session_start();
 					<label id='email' for='email'>p</label>
 					<input type='text' name='email' id='mail' placeholder='Email' required/>
 					<p id='emailerror' class="erroremail">*</p>
+					<label id='tipo' for='tipo' class="tipo" >1</label>
+					<select name="tipo">
+						<option value='1'>Planta</option>
+						<option value='2'>Fuego</option>
+						<option value='3'>Agua</option>
+						<option value='4'>Luz</option>
+						<option value='5'>Oscuridad</option>
+					</select>
 					<label class="atras" onclick="closeregister()">x</label>
 					<input type='submit' id='submit' name='logg' value='a'/>
 				</div>
@@ -126,23 +134,5 @@ session_start();
 				</div>	
 			</div>
 		</div>
-	<!--	
-		<div id="okRegister">
-			<div class="fondotransparente">
-				<div class="fondoUser">
-					<div class="cerrar" onclick="cerrar_okregister()"></div>
-					<div class="col-md-12 col-xs-6">
-						<h3>Gracias por registrarte</h3>
-						<p><b>Usuario:</b></p>
-						<p><b>Email:</b></p>	
-					</div>
-					
-				</div>	
-			</div>
-		</div>
-	-->
-
-
-	
 </body>
 </html>

@@ -5,11 +5,11 @@ session_start();
 <?php 
 
 
-	function createUser ($us, $pwd, $mail){
+	function createUser ($us, $pwd, $mail,$tipo){
 	include "connection.php";
 
 	$conn = connect();
-	$sql = "INSERT INTO usuarios values (NULL,'".$us."', '".$pwd."', '".$mail."', '0', '1');";
+	$sql = "INSERT INTO usuarios values (NULL,'".$us."', '".$pwd."', '".$mail."', '0', '1','".$tipo."');";
         if ($conn->query($sql) === TRUE) {
     return true;
         } else {
@@ -18,7 +18,7 @@ session_start();
         $conn->close();
 
 	}
-	if(createUser($_POST["username"],$_POST["password"],$_POST["email"]))
+	if(createUser($_POST["username"],$_POST["password"],$_POST["email"],$_POST["tipo"]))
 	{
 	session_unset();
 		$conn = connect();
@@ -39,6 +39,7 @@ session_start();
 		$_SESSION['email'] = $row["Email"];
 		$_SESSION['exp'] = $row["Exp_actual"];
 		$_SESSION['nivel'] = $row["Nivel"];
+		$_SESSION['mascota'] = $row["Mascota"];
 
 		$sql = "SELECT experiencia FROM experiencia WHERE nivel = '".$_SESSION['nivel']."';";
 		$row = $conn->query($sql);
