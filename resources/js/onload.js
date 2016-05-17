@@ -76,7 +76,7 @@ window.onload = function(){
 		character.className = spec.className || 'enemy';
 		if (character.className == 'enemy'){
 			character.setAttribute('onclick', 'selectEnemy(this)');
-			//character.style.display = 'inline';
+			
 		}
 		character.name = spec.name;
 		character.style.width= '100px';
@@ -86,14 +86,15 @@ window.onload = function(){
 		character.attack = spec.attack || 10;
 		character.defense = spec.defense || 10;
 		character.style.backgroundImage = 'url("resources/img/' + spec.bg + '")';
-		character.style.float = 'left';
+		character.style.display = 'inline-block';
+		//character.style.float = 'left';
 		character.style.margin= '5px';
 		switch (character.type){
 			case 1: character.typeName = 'grass'; break;
 			case 2: character.typeName = 'fire'; break;
 			case 3: character.typeName = 'water'; break;
-			case 4: character.typeName = 'electric'; break;
-			case 5: character.typeName = 'wind'; break;
+			case 4: character.typeName = 'light'; break;
+			case 5: character.typeName = 'dark'; break;
 		}
 		character.maxHP = spec.maxHP || 100;
 		character.currentHP = spec.currentHP || character.maxHP;
