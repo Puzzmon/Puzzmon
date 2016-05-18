@@ -47,7 +47,13 @@ session_start();
 		<div class='menu top' style="display:none">
 			<div id="top" class="col-md-3 col-xs-3 border"><b class="user" onclick="abrir_user()"> <?=$_SESSION["username"]?></b></div>
 			<div id="top" class="col-md-3 col-xs-3 border"><b>Nivel: <?=$_SESSION["nivel"]?></b></div>
-			<div id="top" class="col-md-offset-3 col-md-3 col-xs-offset-3 col-xs-3 border"><a href="cerrar_sesion.php">Log Out</a></div>
+			<div id="top" class="col-md-3 col-xs-3 border">
+				<form action='dame_exp_premoh.php' method='POST'>
+					<input type="text" name="setexp"></input>
+					<input type="submit" style="width:10px"></input>
+				</form>
+			</div>
+			<div id="top" class="col-md-3 col-xs-3 border"><a href="cerrar_sesion.php">Log Out</a></div>
 		</div>
 	<?php		
 		}	
@@ -141,24 +147,27 @@ session_start();
 			</div>
 		</div>
 		<!-- DIV DE NIVELES DE MAPAS -->
+		<?php
+		if (!empty($_SESSION["username"])){
+		?>	
 		<div id="nivelmapas" class="col-md-3 col-xs-11 ">
 			<div class="fondoniveles">
 				<div id="niveles" class="niveles">
 					<div id="nivel5" class="nivel col-md-12">
-						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel5.png" /></div>
-						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star5.png" /></div>
+						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel5d.png" /></div>
+						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star5d.png" /></div>
 					</div>
 					<div id="nivel4" class="nivel col-md-12">
-						<div class="center right col-md-6 img"><img src="resources/img/Monsters/75x75/nivel4.png" /></div>
-						<div class="center left col-md-6 img"><img class="center" src="resources/img/Monsters/star4.png" /></div>
+						<div class="center right col-md-6 img"><img src="resources/img/Monsters/75x75/nivel4d.png" /></div>
+						<div class="center left col-md-6 img"><img class="center" src="resources/img/Monsters/star4d.png" /></div>
 					</div>
 					<div id="nivel3" class="nivel col-md-12">
-						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel3.png" /></div>
-						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star3.png" /></div>
+						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel3d.png" /></div>
+						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star3d.png" /></div>
 					</div>
 					<div id="nivel2" class="nivel col-md-12">
-						<div class="center right col-md-6 img"><img src="resources/img/Monsters/75x75/nivel2.png" /></div>
-						<div class="center left col-md-6 img"><img class="center" src="resources/img/Monsters/star2.png" /></div>
+						<div class="center right col-md-6 img"><img src="resources/img/Monsters/75x75/nivel2d.png" /></div>
+						<div class="center left col-md-6 img"><img class="center" src="resources/img/Monsters/star2d.png" /></div>
 					</div>
 					<div id="nivel1" class="nivel col-md-12">
 						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel1.png" /></div>
@@ -167,5 +176,8 @@ session_start();
 				</div>
 			</div>
 		</div>
+		<?php
+		}
+		?>
 </body>
 </html>
