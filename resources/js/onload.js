@@ -112,9 +112,9 @@ window.onload = function(){
 	/*newCharacter({name: 'Enemy', bg: 'pet1.png', className: 'enemy'});
 	newCharacter({name: 'Enemy', bg: 'pet1.png', className: 'enemy'});*/
 	you = newCharacter({maxHP: 20, currentHP: 20, name: 'You', className: 'you', type: 2, attack: 14, bg: 'pet2.png'});
+	screen.appendChild(newCharacter({name: 'Enemy', bg: 'pet1.gif', maxHP: 69, type: 1, className: 'enemy'}));
+	screen.appendChild(newCharacter({name: 'Enemy', bg: 'pet5.gif', maxHP: 66, type: 5, className: 'enemy'}));
 	screen.appendChild(newCharacter({name: 'Enemy', bg: 'pet3.png',maxHP: 77, type: 3, defense: 8, className: 'enemy'}));
-	screen.appendChild(newCharacter({name: 'Enemy', bg: 'pet1.png', maxHP: 69, type: 1, className: 'enemy'}));
-	screen.appendChild(newCharacter({name: 'Enemy', bg: 'pet5.png', maxHP: 66, type: 5, className: 'enemy'}));
 	selectEnemy(document.getElementsByClassName('enemy')[0]);
 	enemyList = document.getElementsByClassName('enemy');
 	screen.appendChild(you);
