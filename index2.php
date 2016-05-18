@@ -92,11 +92,11 @@ session_start();
 					<p id='emailerror' class="erroremail">*</p>
 					<label id='tipo' for='tipo' class="tipo" >1</label>
 					<select name="tipo">
-						<option value='1'>Planta</option>
-						<option value='2'>Fuego</option>
-						<option value='3'>Agua</option>
-						<option value='4'>Luz</option>
-						<option value='5'>Oscuridad</option>
+						<option value='1'>Samuleaf</option>
+						<option value='2'>Lampkin</option>
+						<option value='3'>Droppentice</option>
+						<option value='4'>Placeholder</option>
+						<option value='5'>Wingskull</option>
 					</select>
 					<label class="atras" onclick="closeregister()">x</label>
 					<input type='submit' id='submit' name='logg' value='a'/>
