@@ -165,7 +165,7 @@ function moveDown(){
 }
 
 function checkEffectivity(spec){
-/* 1 = planta, 2 = fuego, 3 = agua, 4 = rayo, 5 = viento */ 
+/* 1 = planta, 2 = fuego, 3 = agua, 4 = luz, 5 = oscuridad */ 
 	switch (spec.damageType){
 		case 1:
 			switch (spec.enemyType){
