@@ -59,7 +59,7 @@ session_start();
 		}	
 		?>
 		<div id="puzzmon" class="col-md-offset-4 col-md-3">
-			<a href="index.html"><img class="puzzmon" src="resources/img/puzzmon2.png"/></a>
+			<img class="puzzmon" src="resources/img/puzzmon2.png"/>
 		</div>
 		<!-- DIV DE LOGGIN -->
 		<div id='loggin' style='display:none'>
@@ -114,17 +114,19 @@ session_start();
 						<?php
 							include 'connection.php';
 							$conn = connect();
-							$sql = "SELECT Exp_actual FROM usuarios WHERE Id = 1;" or die('Error: ' . mysql_error());
+							$sql = "SELECT Exp_actual FROM usuarios WHERE Id = '".$_SESSION['id']."'" or die('Error: ' . mysql_error());
 							$row = $conn->query($sql);
 							if ($row == false){
 								die(mysql_error());
 							}
 							$row = $row->fetch_assoc();
-							$exp = $_SESSION['exp'];
+							$exp = $row["Exp_actual"];
 							$exp_total = $_SESSION['Exp_total'];
 							$porcentaje = ($exp * 100 ) / $exp_total; 
+							$porcentaje = floor($porcentaje);
+							echo '<script>console.log("experiencia: '.$exp.' * 100 / '.$exp_total.' ='.$porcentaje.'")</script>';
 							
-							?>
+						?>
 						<p>Nivel: <?=$_SESSION["nivel"]?>  EXP: <span id="Userexp"></span>/<span id="Userexptotal"></span></p> <!-- CALCULAR LA EXPERIENCIA exp actual * 100% / exp nivel -->
 						<div class="progress progress-striped active">
 
@@ -135,7 +137,39 @@ session_start();
 						</div>
 					</div>
 					<div class="UserIcon col-md-6 col-xs-6">
+						<?php
+						if($_SESSION['mascota']==1)
+						{
+						?>
 						<img src="resources/img/iconuser_1.png"></img>
+						<?php	
+						}
+						else if($_SESSION['mascota']==2)
+						{
+						?>
+						<img src="resources/img/iconuser_2.png"></img>
+						<?php	
+						}
+						else if($_SESSION['mascota']==3)
+						{
+						?>
+						<img src="resources/img/iconuser_3.png"></img>
+						<?php	
+						}
+						else if($_SESSION['mascota']==4)
+						{
+						?>
+						<img src="resources/img/iconuser_4.png"></img>
+						<?php	
+						}
+						else if($_SESSION['mascota']==5)
+						{
+						?>
+						<img src="resources/img/iconuser_5.png"></img>
+						<?php	
+						}
+						?>
+
 					</div>
 					<div class="Estadisticas col-md-12">
 						<b>Estadisticas</b>
@@ -152,32 +186,172 @@ session_start();
 		?>	
 		<div id="nivelmapas" class="col-md-3 col-xs-11 ">
 			<div class="fondoniveles">
+				<?php							
+					$sql = "SELECT * FROM usuarios WHERE Id = '".$_SESSION['id']."';" or die('Error: ' . mysql_error());
+					$row = $conn->query($sql);
+					if ($row == false){
+						die(mysql_error());
+					}
+					$row = $row->fetch_assoc();							
+					
+					$nivelmapa = $row['nivelmapa'];
+
+				if($nivelmapa == 5)
+				{
+				?>
 				<div id="niveles" class="niveles">
-					<div id="nivel5" class="nivel col-md-12">
-						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel5d.png" /></div>
-						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star5d.png" /></div>
+					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel5()">
+						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel5.png" /></div>
+						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star5.png" /></div>
 					</div>
-					<div id="nivel4" class="nivel col-md-12">
-						<div class="center right col-md-6 img"><img src="resources/img/Monsters/75x75/nivel4d.png" /></div>
-						<div class="center left col-md-6 img"><img class="center" src="resources/img/Monsters/star4d.png" /></div>
+					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel4()">
+						<div class="center right col-md-6 img"><img src="resources/img/Monsters/75x75/nivel4.png" /></div>
+						<div class="center left col-md-6 img"><img class="center" src="resources/img/Monsters/star4.png" /></div>
 					</div>
-					<div id="nivel3" class="nivel col-md-12">
-						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel3d.png" /></div>
-						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star3d.png" /></div>
+					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel3()">
+						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel3.png" /></div>
+						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star3.png" /></div>
 					</div>
-					<div id="nivel2" class="nivel col-md-12">
-						<div class="center right col-md-6 img"><img src="resources/img/Monsters/75x75/nivel2d.png" /></div>
-						<div class="center left col-md-6 img"><img class="center" src="resources/img/Monsters/star2d.png" /></div>
+					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel2()">
+						<div class="center right col-md-6 img"><img src="resources/img/Monsters/75x75/nivel2.png" /></div>
+						<div class="center left col-md-6 img"><img class="center" src="resources/img/Monsters/star2.png" /></div>
 					</div>
-					<div id="nivel1" class="nivel col-md-12">
+					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel1()">
 						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel1.png" /></div>
 						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star1.png" /></div>
 					</div>
 				</div>
+				<?php
+				}
+				else if($nivelmapa == 4)
+				{
+				?>
+				<div id="niveles" class="niveles">
+					<div id="nivel" class="nivel col-md-12 disabled" >
+						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel5d.png" /></div>
+						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star5d.png" /></div>
+					</div>
+					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel4()">
+						<div class="center right col-md-6 img"><img src="resources/img/Monsters/75x75/nivel4.png" /></div>
+						<div class="center left col-md-6 img"><img class="center" src="resources/img/Monsters/star4.png" /></div>
+					</div>
+					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel3()">
+						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel3.png" /></div>
+						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star3.png" /></div>
+					</div>
+					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel2()">
+						<div class="center right col-md-6 img"><img src="resources/img/Monsters/75x75/nivel2.png" /></div>
+						<div class="center left col-md-6 img"><img class="center" src="resources/img/Monsters/star2.png" /></div>
+					</div>
+					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel1()">
+						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel1.png" /></div>
+						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star1.png" /></div>
+					</div>
+				</div>
+				<?php
+				}
+				else if($nivelmapa == 3)
+				{
+				?>
+				<div id="niveles" class="niveles">
+					<div id="nivel" class="nivel col-md-12 disabled" >
+						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel5d.png" /></div>
+						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star5d.png" /></div>
+					</div>
+					<div id="nivel" class="nivel col-md-12 disabled" >
+						<div class="center right col-md-6 img"><img src="resources/img/Monsters/75x75/nivel4d.png" /></div>
+						<div class="center left col-md-6 img"><img class="center" src="resources/img/Monsters/star4d.png" /></div>
+					</div>
+					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel3()">
+						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel3.png" /></div>
+						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star3.png" /></div>
+					</div>
+					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel2()">
+						<div class="center right col-md-6 img"><img src="resources/img/Monsters/75x75/nivel2.png" /></div>
+						<div class="center left col-md-6 img"><img class="center" src="resources/img/Monsters/star2.png" /></div>
+					</div>
+					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel1()">
+						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel1.png" /></div>
+						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star1.png" /></div>
+					</div>
+				</div>
+				<?php
+				}
+				else if($nivelmapa == 2)
+				{
+				?>
+				<div id="niveles" class="niveles">
+					<div id="nivel" class="nivel col-md-12 disabled" >
+						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel5d.png" /></div>
+						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star5d.png" /></div>
+					</div>
+					<div id="nivel" class="nivel col-md-12 disabled" >
+						<div class="center right col-md-6 img"><img src="resources/img/Monsters/75x75/nivel4d.png" /></div>
+						<div class="center left col-md-6 img"><img class="center" src="resources/img/Monsters/star4d.png" /></div>
+					</div>
+					<div id="nivel" class="nivel col-md-12 disabled" >
+						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel3d.png" /></div>
+						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star3d.png" /></div>
+					</div>
+					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel2()">
+						<div class="center right col-md-6 img"><img src="resources/img/Monsters/75x75/nivel2.png" /></div>
+						<div class="center left col-md-6 img"><img class="center" src="resources/img/Monsters/star2.png" /></div>
+					</div>
+					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel1()">
+						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel1.png" /></div>
+						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star1.png" /></div>
+					</div>
+				</div>
+				<?php
+				}
+				else if($nivelmapa == 1)
+				{
+				?>
+				<div id="niveles" class="niveles">
+					<div id="nivel" class="nivel col-md-12 disabled" >
+						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel5d.png" /></div>
+						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star5d.png" /></div>
+					</div>
+					<div id="nivel" class="nivel col-md-12 disabled" >
+						<div class="center right col-md-6 img"><img src="resources/img/Monsters/75x75/nivel4d.png" /></div>
+						<div class="center left col-md-6 img"><img class="center" src="resources/img/Monsters/star4d.png" /></div>
+					</div>
+					<div id="nivel" class="nivel col-md-12 disabled" >
+						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel3d.png" /></div>
+						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star3d.png" /></div>
+					</div>
+					<div id="nivel" class="nivel col-md-12 disabled" >
+						<div class="center right col-md-6 img"><img src="resources/img/Monsters/75x75/nivel2d.png" /></div>
+						<div class="center left col-md-6 img"><img class="center" src="resources/img/Monsters/star2d.png" /></div>
+					</div>
+					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel1()">
+						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel1.png" /></div>
+						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star1.png" /></div>
+					</div>
+				</div>
+				<?php
+				}
+				?>
 			</div>
 		</div>
 		<?php
 		}
 		?>
+		<!-- DIV DE NIVELES DE MAPAS -->
+		<div id="nivelmapa1" class="nivelmapa col-md-offset-3 col-md-9 col-xs-12">
+			<h1>MONZTRUO 1</h1>
+		</div>
+		<div id="nivelmapa2" class="nivelmapa col-md-offset-3 col-md-9 col-xs-12">
+			<h1>MONZTRUO 2</h1>
+		</div>
+		<div id="nivelmapa3" class="nivelmapa col-md-offset-3 col-md-9 col-xs-12">
+			<h1>MONZTRUO 3</h1>
+		</div>
+		<div id="nivelmapa4" class="nivelmapa col-md-offset-3 col-md-9 col-xs-12">
+			<h1>MONZTRUO 4</h1>
+		</div>
+		<div id="nivelmapa5" class="nivelmapa col-md-offset-3 col-md-9 col-xs-12">
+			<h1>MONZTRUO 5</h1>
+		</div>
 </body>
 </html>

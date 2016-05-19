@@ -45,8 +45,8 @@ $(document).ready(function() {
 	     		document.getElementById("Userexptotal").innerHTML = Exp_total;
 	     		var Exp = xhttp.responseText;
 	     		var Porcentaje = (Exp*100) / Exp_total;
-	     		document.getElementById('barraExp').style.width = Math.round(Porcentaje)+'%';
-	     		document.getElementById('barraExptext').innerHTML = Math.round(Porcentaje)+'%';
+	     		document.getElementById('barraExp').style.width = Math.floor(Porcentaje)+'%';
+	     		document.getElementById('barraExptext').innerHTML = Math.floor(Porcentaje)+'%';
 	     		}
 	  		};
 	  xhttp2.open("GET", "DB_Functions2.php", true);
@@ -64,4 +64,39 @@ $(document).ready(function() {
 	function cerrar_okregister(){
 		document.getElementById('okRegister').style.display = 'none';	
 	}	
+	function abrirnivel1(){
+		if(document.getElementById('nivelmapa1').style.display == '' || document.getElementById('nivelmapa1').style.display == 'none' )
+		{
+		document.getElementById('nivelmapa1').style.display = 'block';
+		}
+		else{document.getElementById('nivelmapa1').style.display = 'none';}
+	}
+	function abrirnivel2(){
+		if(document.getElementById('nivelmapa2').style.display == '' || document.getElementById('nivelmapa2').style.display == 'none' )
+		{
+		document.getElementById('nivelmapa2').style.display = 'block';
+		}
+		else{document.getElementById('nivelmapa2').style.display = 'none';}
+	}
+	function abrirnivel3(){
+		if(document.getElementById('nivelmapa3').style.display == '' || document.getElementById('nivelmapa3').style.display == 'none' )
+		{
+		document.getElementById('nivelmapa3').style.display = 'block';
+		}
+		else{document.getElementById('nivelmapa3').style.display = 'none';}
+	}
+	function abrirnivel4(){
+		if(document.getElementById('nivelmapa4').style.display == '' || document.getElementById('nivelmapa4').style.display == 'none' )
+		{
+		document.getElementById('nivelmapa4').style.display = 'block';
+		}
+		else{document.getElementById('nivelmapa4').style.display = 'none';}
+	}
+	function abrirnivel5(){
+		if(document.getElementById('nivelmapa5').style.display == '' || document.getElementById('nivelmapa5').style.display == 'none' )
+		{
+		document.getElementById('nivelmapa5').style.display = 'block';
+		}
+		else{document.getElementById('nivelmapa5').style.display = 'none';}
+	}
 	

@@ -251,3 +251,20 @@ p.erroremail{
 #top input{
 	color: black;
 }
+#nivel.disabled{
+	cursor:not-allowed;
+}
+#nivel.enabled{
+	cursor:pointer;
+}
+div.nivelmapa{
+	position:absolute;
+	display:none;
+	right:0;
+	top:85px;
+	height:85%;
+	background-image: url("../img/fondotrans.png");
+}
+
+
+
