@@ -31,6 +31,10 @@ var grassDamage = 0;
 var elecDamage = 0;
 var windDamage = 0;
 
+
+
+
+
 function selectEnemy(object){
 	for(var i = 0; i<enemyList.length; i++){
 		enemyList[i].style.border = '3px solid black';

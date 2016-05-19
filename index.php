@@ -1,0 +1,53 @@
+<?php 
+session_start();
+ ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="resources/js/head.js"></script>
+</head>
+	
+<body>
+	<style>
+		html{
+			height: 100%;
+		}
+		body{
+			height: 100%;
+			background-color: pink;
+			-webkit-touch-callout: none;
+		    -webkit-user-select: none;
+		    -khtml-user-select: none;
+		    -moz-user-select: none;
+		    -ms-user-select: none;
+		    user-select: none;}
+		#game{
+			width: 350px;
+			height: 100%;
+
+			
+		}
+		#battle{
+			height: 40%;
+			
+		}
+		#grid{
+			margin-left: 40px;
+			width: 270px;
+			height: 50%;
+		}
+		#points{
+			text-align: center;
+		}
+	</style>
+	<div id="game">
+		<div id="battle">
+		</div>
+		<div id="grid"></div>
+	</div>
+<script src="resources/js/onload.js"></script>
+
+</body>
+</html>

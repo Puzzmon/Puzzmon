@@ -1,3 +1,6 @@
+<?php 
+session_start();
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,7 +37,7 @@
 			console.log(algo);
 		}
 
-		ajaxCall('prueba_mapa.php', {level: 1}, printMap);
+		ajaxCall('prueba_mapa.php', {level: 2}, printMap);
 
 	</script>
 </body>
