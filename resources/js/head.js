@@ -1,4 +1,4 @@
-
+var levelID = 1;
 var enemyList = {};
 var pos = {};
 pos.row = {};

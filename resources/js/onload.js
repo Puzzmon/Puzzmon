@@ -69,7 +69,8 @@ window.onload = function(){
 	screen.appendChild(map);
 	
 
-	var screen = document.getElementById('battle');
+	var allyZone = document.getElementById('allyZone');
+	var enemyZone = document.getElementById('enemyZone');
 
 	var newCharacter = function(spec){
 		var character = document.createElement('div');
@@ -122,7 +123,7 @@ window.onload = function(){
 			attack: object.character.Atk,
 			className: 'you'
 		});
-		screen.appendChild(newCharacter({
+		enemyZone.appendChild(newCharacter({
 			id: object.enemy1.ID,
 			maxHP: object.enemy1.HP,
 			name: object.enemy1.Name, 
@@ -134,7 +135,7 @@ window.onload = function(){
 		}));
 
 		if(object.enemy2.ID != 0){
-			screen.appendChild(newCharacter({
+			enemyZone.appendChild(newCharacter({
 				id: object.enemy2.ID,
 				maxHP: object.enemy2.HP,
 				name: object.enemy2.Name, 
@@ -147,7 +148,7 @@ window.onload = function(){
 
 		}
 		if(object.enemy3.ID != 0){
-			screen.appendChild(newCharacter({
+			enemyZone.appendChild(newCharacter({
 				id: object.enemy3.ID,
 				maxHP: object.enemy3.HP,
 				name: object.enemy3.Name, 
@@ -162,7 +163,7 @@ window.onload = function(){
 
 		selectEnemy(document.getElementsByClassName('enemy')[0]);
 		enemyList = document.getElementsByClassName('enemy');
-		screen.appendChild(you);
+		allyZone.appendChild(you);
 		checkGrid();
 		you.update({currentHP: you.maxHP});
 		for(var i = 0; i < enemyList.length; i++){
@@ -196,7 +197,7 @@ window.onload = function(){
 		httpReq.send();
 	}
 
-	ajaxCall('prueba_mapa.php', {level: 2}, printMap);
+	ajaxCall('prueba_mapa.php', {level: levelID}, printMap);
 	/*newCharacter({name: 'Enemy', bg: 'pet1.png', className: 'enemy'});
 	newCharacter({name: 'Enemy', bg: 'pet1.png', className: 'enemy'});*/
 	/*you = newCharacter({maxHP: 20, currentHP: 20, name: 'You', className: 'you', type: 2, attack: 14, bg: 'pet2.png'});

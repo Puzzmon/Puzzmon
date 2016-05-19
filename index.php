@@ -7,6 +7,10 @@ session_start();
 	<meta charset="UTF-8">
 	<title></title>
 	<script src="resources/js/head.js"></script>
+	<?php
+		$i = 2;
+		echo '<script> levelID = '.$i.'</script>';
+	 ?>
 </head>
 	
 <body>
@@ -30,12 +34,21 @@ session_start();
 			
 		}
 		#battle{
+			text-align: center;
 			height: 40%;
 			
 		}
+		#enemyZone{
+			margin: auto;
+			height: 50%;
+		}
+		#allyZone{
+			margin: auto;
+			height: 50%;
+		}
 		#grid{
-			margin-left: 40px;
-			width: 270px;
+			margin: auto;
+			width: 75%;
 			height: 50%;
 		}
 		#points{
@@ -44,6 +57,8 @@ session_start();
 	</style>
 	<div id="game">
 		<div id="battle">
+			<div id="enemyZone"></div>
+			<div id="allyZone"></div>
 		</div>
 		<div id="grid"></div>
 	</div>
