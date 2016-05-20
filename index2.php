@@ -41,7 +41,7 @@ session_start();
 	?>	
 		<!-- DIV TOP -->
 		<div class='menu bienvenido'>
-			<p>Bienvenido, <b><?=$_SESSION["username"]?></b></p>
+			<h2>Bienvenido, <b><?=$_SESSION["username"]?></b></h2>
 		</div>
 		<!-- DIV TOP -->
 		<div class='menu top' style="display:none">
@@ -59,7 +59,7 @@ session_start();
 		}	
 		?>
 		<div id="puzzmon" class="col-md-offset-4 col-md-3">
-			<img class="puzzmon" src="resources/img/puzzmon2.png"/>
+			<img class="puzzmon" src="resources/img/puzzmon4.png"/>
 		</div>
 		<!-- DIV DE LOGGIN -->
 		<div id='loggin' style='display:none'>
@@ -124,7 +124,7 @@ session_start();
 							$exp_total = $_SESSION['Exp_total'];
 							$porcentaje = ($exp * 100 ) / $exp_total; 
 							$porcentaje = floor($porcentaje);
-							echo '<script>console.log("experiencia: '.$exp.' * 100 / '.$exp_total.' ='.$porcentaje.'")</script>';
+							
 							
 						?>
 						<p>Nivel: <?=$_SESSION["nivel"]?>  EXP: <span id="Userexp"></span>/<span id="Userexptotal"></span></p> <!-- CALCULAR LA EXPERIENCIA exp actual * 100% / exp nivel -->
@@ -184,7 +184,7 @@ session_start();
 		<?php
 		if (!empty($_SESSION["username"])){
 		?>	
-		<div id="nivelmapas" class="col-md-3 col-xs-11 ">
+		<div id="nivelmapas" class="col-md-3 col-xs-11 " style="display:none">
 			<div class="fondoniveles">
 				<?php							
 					$sql = "SELECT * FROM usuarios WHERE Id = '".$_SESSION['id']."';" or die('Error: ' . mysql_error());
@@ -200,23 +200,23 @@ session_start();
 				{
 				?>
 				<div id="niveles" class="niveles">
-					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel5()">
+					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel(5)">
 						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel5.png" /></div>
 						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star5.png" /></div>
 					</div>
-					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel4()">
+					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel(4)">
 						<div class="center right col-md-6 img"><img src="resources/img/Monsters/75x75/nivel4.png" /></div>
 						<div class="center left col-md-6 img"><img class="center" src="resources/img/Monsters/star4.png" /></div>
 					</div>
-					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel3()">
+					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel(3)">
 						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel3.png" /></div>
 						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star3.png" /></div>
 					</div>
-					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel2()">
+					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel(2)">
 						<div class="center right col-md-6 img"><img src="resources/img/Monsters/75x75/nivel2.png" /></div>
 						<div class="center left col-md-6 img"><img class="center" src="resources/img/Monsters/star2.png" /></div>
 					</div>
-					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel1()">
+					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel(1)">
 						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel1.png" /></div>
 						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star1.png" /></div>
 					</div>
@@ -231,19 +231,19 @@ session_start();
 						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel5d.png" /></div>
 						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star5d.png" /></div>
 					</div>
-					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel4()">
+					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel(4)">
 						<div class="center right col-md-6 img"><img src="resources/img/Monsters/75x75/nivel4.png" /></div>
 						<div class="center left col-md-6 img"><img class="center" src="resources/img/Monsters/star4.png" /></div>
 					</div>
-					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel3()">
+					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel(3)">
 						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel3.png" /></div>
 						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star3.png" /></div>
 					</div>
-					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel2()">
+					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel(2)">
 						<div class="center right col-md-6 img"><img src="resources/img/Monsters/75x75/nivel2.png" /></div>
 						<div class="center left col-md-6 img"><img class="center" src="resources/img/Monsters/star2.png" /></div>
 					</div>
-					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel1()">
+					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel(1)">
 						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel1.png" /></div>
 						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star1.png" /></div>
 					</div>
@@ -262,15 +262,15 @@ session_start();
 						<div class="center right col-md-6 img"><img src="resources/img/Monsters/75x75/nivel4d.png" /></div>
 						<div class="center left col-md-6 img"><img class="center" src="resources/img/Monsters/star4d.png" /></div>
 					</div>
-					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel3()">
+					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel(3)">
 						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel3.png" /></div>
 						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star3.png" /></div>
 					</div>
-					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel2()">
+					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel(2)">
 						<div class="center right col-md-6 img"><img src="resources/img/Monsters/75x75/nivel2.png" /></div>
 						<div class="center left col-md-6 img"><img class="center" src="resources/img/Monsters/star2.png" /></div>
 					</div>
-					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel1()">
+					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel(1)">
 						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel1.png" /></div>
 						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star1.png" /></div>
 					</div>
@@ -293,11 +293,11 @@ session_start();
 						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel3d.png" /></div>
 						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star3d.png" /></div>
 					</div>
-					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel2()">
+					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel(2)">
 						<div class="center right col-md-6 img"><img src="resources/img/Monsters/75x75/nivel2.png" /></div>
 						<div class="center left col-md-6 img"><img class="center" src="resources/img/Monsters/star2.png" /></div>
 					</div>
-					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel1()">
+					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel(1)">
 						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel1.png" /></div>
 						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star1.png" /></div>
 					</div>
@@ -324,7 +324,7 @@ session_start();
 						<div class="center right col-md-6 img"><img src="resources/img/Monsters/75x75/nivel2d.png" /></div>
 						<div class="center left col-md-6 img"><img class="center" src="resources/img/Monsters/star2d.png" /></div>
 					</div>
-					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel1()">
+					<div id="nivel" class="nivel col-md-12 enabled" onclick="abrirnivel(1)">
 						<div class="center left col-md-6 img"><img src="resources/img/Monsters/75x75/nivel1.png" /></div>
 						<div class="center right col-md-6 img"><img class="center" src="resources/img/Monsters/star1.png" /></div>
 					</div>
@@ -340,18 +340,93 @@ session_start();
 		<!-- DIV DE NIVELES DE MAPAS -->
 		<div id="nivelmapa1" class="nivelmapa col-md-offset-3 col-md-9 col-xs-12">
 			<h1>MONZTRUO 1</h1>
+			<div class="textnivel col-md-4 col-xs-12" style="color:white" >
+				<p>
+				Esto es un Monstruo de nivel 1 Ojcuro
+				</p>
+			</div>
+			<div class="imagenivel col-md-8 col-xs-12" >
+				<div class="Image1 col-md-12 col-xs-12" >
+				</div>
+				<div class="formsend " >
+					<form action="index.php" method="POST">
+						<input value="1" style="display:none" name="lvlid" />
+						<input type="submit" value="Jugar"/>
+					</form>
+				</div>
+			</div>
 		</div>
 		<div id="nivelmapa2" class="nivelmapa col-md-offset-3 col-md-9 col-xs-12">
 			<h1>MONZTRUO 2</h1>
+			<div class="textnivel col-md-4 col-xs-12" style="color:white" >
+				<p>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+				Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+				Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+				Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</p>
+			</div>
+			<div class="imagenivel col-md-8 col-xs-12" >
+				<div class="Image2 col-md-12 col-xs-12" >
+				</div>
+				<div class="formsend " >
+					<input type="submit" value="Jugar"/>
+				</div>
+			</div>
 		</div>
 		<div id="nivelmapa3" class="nivelmapa col-md-offset-3 col-md-9 col-xs-12">
 			<h1>MONZTRUO 3</h1>
+			<div class="textnivel col-md-4 col-xs-12" style="color:white" >
+				<p>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+				Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+				Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+				Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</p>
+			</div>
+			<div class="imagenivel col-md-8 col-xs-12" >
+				<div class="Image3 col-md-12 col-xs-12" >
+				</div>
+				<div class="formsend " >
+					<input type="submit" value="Jugar"/>
+				</div>
+			</div>
 		</div>
 		<div id="nivelmapa4" class="nivelmapa col-md-offset-3 col-md-9 col-xs-12">
 			<h1>MONZTRUO 4</h1>
+			<div class="textnivel col-md-4 col-xs-12" style="color:white" >
+				<p>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+				Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+				Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+				Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</p>
+			</div>
+			<div class="imagenivel col-md-8 col-xs-12" >
+				<div class="Image4 col-md-12 col-xs-12" >
+				</div>
+				<div class="formsend " >
+					<input type="submit" value="Jugar"/>
+				</div>
+			</div>
 		</div>
 		<div id="nivelmapa5" class="nivelmapa col-md-offset-3 col-md-9 col-xs-12">
 			<h1>MONZTRUO 5</h1>
+			<div class="textnivel col-md-4 col-xs-12" style="color:white" >
+				<p>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+				Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+				Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+				Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</p>
+			</div>
+			<div class="imagenivel col-md-8 col-xs-12" >
+				<div class="Image5 col-md-12 col-xs-12" >
+				</div>
+				<div class="formsend " >
+					<input type="submit" value="Jugar"/>
+				</div>
+			</div>
 		</div>
 </body>
 </html>

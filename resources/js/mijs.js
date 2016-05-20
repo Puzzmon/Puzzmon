@@ -1,4 +1,4 @@
-$(document).ready(function() {
+	$(document).ready(function() {
 	    setTimeout(function() {
 	        $(".bienvenido").fadeOut(1500);
 	    },2000);
@@ -6,6 +6,11 @@ $(document).ready(function() {
 	$(document).ready(function() {
 	    setTimeout(function() {
 	        $(".top").fadeIn(100);
+	    },3500);
+	});
+	$(document).ready(function() {
+	    setTimeout(function() {
+	        $("#nivelmapas").fadeIn(100);
 	    },3500);
 	});
 	function openlogin(){
@@ -24,6 +29,32 @@ $(document).ready(function() {
 		document.getElementById('buttons').style.display = 'block';
 		document.getElementById('register').style.display = 'none';
 	}
+	function cerrar_user(){
+		document.getElementById('User').style.display = 'none';	
+	}
+	function okregister(){
+		document.getElementById('okRegister').style.display = 'block';
+	}
+	function cerrar_okregister(){
+		document.getElementById('okRegister').style.display = 'none';	
+	}	
+	function abrirnivel(valor){
+		var idvalue = "nivelmapa"+valor;
+		if(document.getElementById(idvalue).style.display == '' || document.getElementById('nivelmapa'+valor+'').style.display == 'none' )
+		{
+		document.getElementById(idvalue).style.display = 'block';
+		for(var i=1; i<=5; i++)
+			{
+				var idvalue2 = "nivelmapa"+i;
+			if(document.getElementById(idvalue2).style.display == 'block' && idvalue2 != idvalue )
+				{
+					document.getElementById(idvalue2).style.display = 'none';
+				}
+			}
+		}
+		else{document.getElementById(idvalue).style.display = 'none';}
+	}	
+	
 	function abrir_user() { 
 		document.getElementById('User').style.display = 'block';
 
@@ -55,48 +86,4 @@ $(document).ready(function() {
 	
 		}
 
-	function cerrar_user(){
-		document.getElementById('User').style.display = 'none';	
-	}
-	function okregister(){
-		document.getElementById('okRegister').style.display = 'block';
-	}
-	function cerrar_okregister(){
-		document.getElementById('okRegister').style.display = 'none';	
-	}	
-	function abrirnivel1(){
-		if(document.getElementById('nivelmapa1').style.display == '' || document.getElementById('nivelmapa1').style.display == 'none' )
-		{
-		document.getElementById('nivelmapa1').style.display = 'block';
-		}
-		else{document.getElementById('nivelmapa1').style.display = 'none';}
-	}
-	function abrirnivel2(){
-		if(document.getElementById('nivelmapa2').style.display == '' || document.getElementById('nivelmapa2').style.display == 'none' )
-		{
-		document.getElementById('nivelmapa2').style.display = 'block';
-		}
-		else{document.getElementById('nivelmapa2').style.display = 'none';}
-	}
-	function abrirnivel3(){
-		if(document.getElementById('nivelmapa3').style.display == '' || document.getElementById('nivelmapa3').style.display == 'none' )
-		{
-		document.getElementById('nivelmapa3').style.display = 'block';
-		}
-		else{document.getElementById('nivelmapa3').style.display = 'none';}
-	}
-	function abrirnivel4(){
-		if(document.getElementById('nivelmapa4').style.display == '' || document.getElementById('nivelmapa4').style.display == 'none' )
-		{
-		document.getElementById('nivelmapa4').style.display = 'block';
-		}
-		else{document.getElementById('nivelmapa4').style.display = 'none';}
-	}
-	function abrirnivel5(){
-		if(document.getElementById('nivelmapa5').style.display == '' || document.getElementById('nivelmapa5').style.display == 'none' )
-		{
-		document.getElementById('nivelmapa5').style.display = 'block';
-		}
-		else{document.getElementById('nivelmapa5').style.display = 'none';}
-	}
 	

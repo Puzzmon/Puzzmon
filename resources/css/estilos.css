@@ -37,19 +37,10 @@ p{color:white;}
 }
 .btnlog{
   background: #3498db;
-  background-image: -webkit-linear-gradient(top, #3498db, #00609c);
-  background-image: -moz-linear-gradient(top, #3498db, #00609c);
-  background-image: -ms-linear-gradient(top, #3498db, #00609c);
-  background-image: -o-linear-gradient(top, #3498db, #00609c);
-  background-image: linear-gradient(to bottom, #3498db, #00609c);
-  -webkit-border-radius: 15;
-  -moz-border-radius: 15;
   border-radius: 15px;
   text-shadow: 2px 2px 3px #000000;
-  -webkit-box-shadow: 0px 2px 5px #000000;
-  -moz-box-shadow: 0px 2px 5px #000000;
   box-shadow: 0px 2px 5px #000000;
-  font-family: 'Open Sans';
+  font-family: radical;
   color: #ffffff;
   font-size: 30px;
   padding: 10px 20px 10px 20px;
@@ -71,19 +62,10 @@ p{color:white;}
 
 .btnregister {
   background: #ff8400;
-  background-image: -webkit-linear-gradient(top, #ff8400, #a35400);
-  background-image: -moz-linear-gradient(top, #ff8400, #a35400);
-  background-image: -ms-linear-gradient(top, #ff8400, #a35400);
-  background-image: -o-linear-gradient(top, #ff8400, #a35400);
-  background-image: linear-gradient(to bottom, #ff8400, #a35400);
-  -webkit-border-radius: 15;
-  -moz-border-radius: 15;
   border-radius: 15px;
   text-shadow: 2px 2px 3px #000000;
-  -webkit-box-shadow: 0px 2px 5px #000000;
-  -moz-box-shadow: 0px 2px 5px #000000;
-  box-shadow: 0px 2px 5px #000000;
-  font-family: 'Open Sans';
+   box-shadow: 0px 2px 5px #000000;
+  font-family: radical;
   color: #ffffff;
   font-size: 30px;
   padding: 10px 20px 10px 20px;
@@ -107,7 +89,7 @@ b.user:hover{
 }
 body{
 	background:#292931;
-	font-family:'Open Sans';
+	font-family: radical;
 }
 label{
 	font-family:icon;
@@ -125,6 +107,9 @@ h1, .menu {
 }
 h1 {
 	background: #333;
+}
+h2 {
+	margin-top:0px;
 }
 #User{
 	display:none;
@@ -147,6 +132,7 @@ h1 {
 		border:1px solid #808080;
 		border-radius: 10px;
 		padding:15px;
+		z-index:1;
 }
 .menu {
 	background: rgba(220, 60, 20, 0.9);
@@ -264,7 +250,60 @@ div.nivelmapa{
 	top:85px;
 	height:85%;
 	background-image: url("../img/fondotrans.png");
+	z-index: -1;
 }
+.content, .textnivel , .imagenivel{
+	height:400px;
+}
+body {
+	font-family: radical;
+	/* estoy aqui */
+}
+.Image1{
+	height:100%;
+	background-image: url("../img/Monsters/Pet1.png");
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+.Image2{
+	height:100%;
+	background-image: url("../img/Monsters/Pet2.png");
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+.Image3{
+	height:100%;
+	background-image: url("../img/Monsters/Pet3.png");
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+.Image4{
+	height:100%;
+	background-image: url("../img/Monsters/Pet4.png");
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+.Image5{
+	height:100%;
+	background-image: url("../img/Monsters/Pet5.png");
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+.formsend
+{
+	position:absolute;
+	height:20%;
+	width:95%;
+	bottom:0;
+}
+@font-face
+{
+ font-family: 'radical';
+ src: url('../fonts/radical.ttf');
+}
+
+
+
 
 
 
