@@ -79,6 +79,7 @@ window.onload = function(){
 			character.setAttribute('onclick', 'selectEnemy(this)');
 			
 		}
+		character.alive = 1;
 		character.name = spec.name;
 		character.style.width= '100px';
 		character.style.height = '100px';
@@ -107,8 +108,13 @@ window.onload = function(){
 			character.innerHTML = character.name + '('+character.typeName+'): ' + character.currentHP + ' / ' + character.maxHP;
 			if (character.currentHP <=0){
 				character.currentHP = 0;
-				character.parentNode.removeChild(character);
-				selectEnemy(document.getElementsByClassName('enemy')[0]);
+				if(character.alive > 0){
+					character.parentNode.removeChild(character);
+					character.alive = 0;
+
+				}
+				if(document.getElementsByClassName('enemy').length >= 1)
+					selectEnemy(document.getElementsByClassName('enemy')[0]);
 			}
 			
 				//character.innerHTML = 'DEAD';

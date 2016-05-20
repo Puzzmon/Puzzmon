@@ -43,6 +43,21 @@ function selectEnemy(object){
 	enemy.style.border =  '3px solid blue';
 }
 
+function checkResult(){
+	enemyList = document.getElementsByClassName('enemy');
+	console.log(enemyList, enemyList.length);
+	ally = document.getElementsByClassName('you');
+	if (enemyList.length < 1 && ally.length < 1){
+		alert('draw');
+	}
+	else if (!enemyList){
+		alert('win');
+	}
+	else if (ally.length < 1){
+		alert('lose');
+	}
+}
+
 function getMouse(object, event){
 	var cells = document.getElementsByTagName('td');
 	tmp.row = object.row;
@@ -99,7 +114,10 @@ function getMouse(object, event){
 				elecDamage = 0;
 				windDamage = 0;
 			}
-			setTimeout(function(){you.update({currentHP: you.currentHP - enemyDamage});}, 1000)
+			setTimeout(function(){
+				you.update({currentHP: you.currentHP - enemyDamage});
+				checkResult();
+			}, 1000)
 			
 		}
 			

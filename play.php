@@ -30,7 +30,7 @@ session_start();
 		    -ms-user-select: none;
 		    user-select: none;}
 		#game{
-			width: 350px;
+			width: 500px;
 			height: 100%;
 
 			
@@ -50,8 +50,8 @@ session_start();
 		}
 		#grid{
 			margin: auto;
-			width: 75%;
-			height: 50%;
+			width: 70%;
+			height: 55%;
 		}
 		#points{
 			text-align: center;
