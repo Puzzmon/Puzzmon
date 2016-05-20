@@ -127,7 +127,7 @@ session_start();
 							
 							
 						?>
-						<p>Nivel: <?=$_SESSION["nivel"]?>  EXP: <span id="Userexp"></span>/<span id="Userexptotal"></span></p> <!-- CALCULAR LA EXPERIENCIA exp actual * 100% / exp nivel -->
+						<p>Nivel: <?=$_SESSION["nivel"]?> </p><p> EXP: <span id="Userexp"></span>/<span id="Userexptotal"></span></p> <!-- CALCULAR LA EXPERIENCIA exp actual * 100% / exp nivel -->
 						<div class="progress progress-striped active">
 
 						  <div id="barraExp" class="progress-bar progress-bar-custom" role="progressbar" >
@@ -141,41 +141,52 @@ session_start();
 						if($_SESSION['mascota']==1)
 						{
 						?>
-						<img src="resources/img/iconuser_1.png"></img>
+						<img src="resources/img/pet1.gif"></img>
 						<?php	
 						}
 						else if($_SESSION['mascota']==2)
 						{
 						?>
-						<img src="resources/img/iconuser_2.png"></img>
+						<img src="resources/img/pet2.gif"></img>
 						<?php	
 						}
 						else if($_SESSION['mascota']==3)
 						{
 						?>
-						<img src="resources/img/iconuser_3.png"></img>
+						<img src="resources/img/pet3.gif"></img>
 						<?php	
 						}
 						else if($_SESSION['mascota']==4)
 						{
 						?>
-						<img src="resources/img/iconuser_4.png"></img>
+						<img src="resources/img/pet4.gif"></img>
 						<?php	
 						}
 						else if($_SESSION['mascota']==5)
 						{
 						?>
-						<img src="resources/img/iconuser_5.png"></img>
+						<img src="resources/img/pet5.gif"></img>
 						<?php	
 						}
 						?>
 
 					</div>
+					<?php
+					$sql = "SELECT * FROM monstruos WHERE Id = '".$_SESSION['mascota']."';" or die('Error: ' . mysql_error());
+					$row = $conn->query($sql);
+					if ($row == false){
+						die(mysql_error());
+					}
+					$row = $row->fetch_assoc();
+					$nombremascota = $row['Nombre'];
+					$hpmascota = $row['Hp_Base'];
+					$ataquemascota = $row['Atk_Base'];
+					$defensamascota = $row['Def_Base'];
+					?>
 					<div class="Estadisticas col-md-12">
-						<b>Estadisticas</b>
+						<b><?=$nombremascota?></b>
 						<hr>
-						<p>Poder : 100</p>
-						<p>Defensa : 50</p>
+						<p><span class="col-md-4">Vida : <?=$hpmascota?></span><span class="col-md-4">Ataque : <?=$ataquemascota?></span><span class="col-md-4">Defensa : <?=$defensamascota?></span></p>
 					</div> 
 				</div>	
 			</div>
