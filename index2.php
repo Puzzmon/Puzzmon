@@ -349,7 +349,7 @@ session_start();
 				<div class="Image1 col-md-12 col-xs-12" >
 				</div>
 				<div class="formsend " >
-					<form action="index.php" method="POST">
+					<form action="play.php" method="POST">
 						<input value="1" style="display:none" name="lvlid" />
 						<input type="submit" value="Jugar"/>
 					</form>
