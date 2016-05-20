@@ -8,7 +8,7 @@ session_start();
 	<title></title>
 	<script src="resources/js/head.js"></script>
 	<?php
-		$i = 2;
+		$i = 1;
 		echo '<script> levelID = '.$i.'</script>';
 	 ?>
 </head>

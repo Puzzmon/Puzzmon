@@ -71,8 +71,36 @@ function getMouse(object, event){
 			}	
 		}
 		checkGrid();
-		if(tmp.move > 0)
-			you.update({currentHP: you.currentHP - 1});
+		if(tmp.move > 0){
+			var enemyDamage = 0;
+			for(var i = 0; i<enemyList.length; i++){
+				switch (enemyList[i].type){
+					case 1:
+						grassDamage = 3;
+						break;
+					case 2:
+						fireDamage = 3;
+						break;
+					case 3:
+						waterDamage = 3;
+						break;
+					case 4:
+						elecDamage = 3;
+						break;
+					case 5:
+						windDamage = 3;
+						break;
+				}
+				enemyDamage+= checkDamage({characterAttack: enemyList[i].attack, enemyDefense: you.defense, characterType: enemyList[i].type, enemyType: you.type});
+				waterDamage = 0;
+				fireDamage = 0;
+				grassDamage = 0;
+				elecDamage = 0;
+				windDamage = 0;
+			}
+			you.update({currentHP: you.currentHP - enemyDamage});
+		}
+			
 		tmp.move=0;
 
 	}
@@ -227,7 +255,6 @@ function checkBoost(spec){
 }
 
 function checkDamage(spec){
-
 	grassDamage= (spec.characterAttack * (1 + (grassDamage - 3) / 4) * checkBoost({characterType: spec.characterType, damageType: 1}) * checkEffectivity({enemyType: spec.enemyType, damageType: 1})) -spec.enemyDefense;
 	fireDamage= (spec.characterAttack * (1 + (fireDamage - 3) / 4) * checkBoost({characterType: spec.characterType, damageType: 2}) * checkEffectivity({enemyType: spec.enemyType, damageType: 2})) -spec.enemyDefense;
 	waterDamage= (spec.characterAttack * (1 + (waterDamage - 3) / 4) * checkBoost({characterType: spec.characterType, damageType: 3}) * checkEffectivity({enemyType: spec.enemyType, damageType: 3})) -spec.enemyDefense;
@@ -356,10 +383,19 @@ function checkGrid(){
 		tmp.combo = 0;
 		checkGrid();
 	}
-
+	var heal = 0;
+	if (grassDamage >= 5 || fireDamage >= 5 || waterDamage >=5 || elecDamage >= 5 || windDamage >=5){
+		heal++;
+	}
+		
 	var damage = checkDamage({characterAttack: you.attack, enemyDefense: enemy.defense, characterType: you.type, enemyType: enemy.type});
 	console.log('Total Damage: '+ damage + ', grass: ' + grassDamage + ', fire: ' + fireDamage + ', water: ' + waterDamage + ', electric: ' + elecDamage + ', wind: ' + windDamage);
 	enemy.update({currentHP: enemy.currentHP - damage});
+	if (heal > 0){
+		you.update({currentHP: you.currentHP + (damage/2)});
+		console.log(you.currentHP + (damage/2));
+	}
+		
 	waterDamage = 0;
 	fireDamage = 0;
 	grassDamage = 0;
