@@ -9,7 +9,7 @@ session_start();
 	include "connection.php";
 
 	$conn = connect();
-	$sql = "INSERT INTO usuarios values (NULL,'".$us."', '".$pwd."', '".$mail."', '0', '1','".$tipo."');";
+	$sql = "INSERT INTO usuarios values (NULL,'".$us."', '".$pwd."', '".$mail."', '0', '1','".$tipo."','1');";
         if ($conn->query($sql) === TRUE) {
     return true;
         } else {
