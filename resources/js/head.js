@@ -91,6 +91,7 @@ function getMouse(object, event){
 						windDamage = 3;
 						break;
 				}
+				if(enemyList[i].currentHP > 0)
 				enemyDamage+= checkDamage({characterAttack: enemyList[i].attack, enemyDefense: you.defense, characterType: enemyList[i].type, enemyType: you.type});
 				waterDamage = 0;
 				fireDamage = 0;
@@ -98,7 +99,8 @@ function getMouse(object, event){
 				elecDamage = 0;
 				windDamage = 0;
 			}
-			you.update({currentHP: you.currentHP - enemyDamage});
+			setTimeout(function(){you.update({currentHP: you.currentHP - enemyDamage});}, 1000)
+			
 		}
 			
 		tmp.move=0;
@@ -392,7 +394,7 @@ function checkGrid(){
 	console.log('Total Damage: '+ damage + ', grass: ' + grassDamage + ', fire: ' + fireDamage + ', water: ' + waterDamage + ', electric: ' + elecDamage + ', wind: ' + windDamage);
 	enemy.update({currentHP: enemy.currentHP - damage});
 	if (heal > 0){
-		you.update({currentHP: you.currentHP + (damage/2)});
+		you.update({currentHP: you.currentHP + damage});
 		console.log(you.currentHP + (damage/2));
 	}
 		

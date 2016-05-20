@@ -104,10 +104,13 @@ window.onload = function(){
 			character.currentHP = spec.currentHP;
 			if(character.currentHP >= character.maxHP)
 				character.currentHP = character.maxHP;
+			character.innerHTML = character.name + '('+character.typeName+'): ' + character.currentHP + ' / ' + character.maxHP;
 			if (character.currentHP <=0){
 				character.currentHP = 0;
+				character.parentNode.removeChild(character);
+				selectEnemy(document.getElementsByClassName('enemy')[0]);
 			}
-			character.innerHTML = character.name + '('+character.typeName+'): ' + character.currentHP + ' / ' + character.maxHP;
+			
 				//character.innerHTML = 'DEAD';
 			return character;
 		}
