@@ -130,7 +130,7 @@ function getMouse(object, event){
 			}
 			setTimeout(function(){
 				you.update({currentHP: you.currentHP - enemyDamage});
-				checkResult();
+				//checkResult();
 			}, 500)
 			
 		}
