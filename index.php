@@ -45,15 +45,17 @@ session_start();
 		</div>
 		<!-- DIV TOP -->
 		<div class='menu top' style="display:none">
-			<div id="top" class="col-md-3 col-xs-3 border"><b class="user" onclick="abrir_user()"> <?=$_SESSION["username"]?></b></div>
-			<div id="top" class="col-md-3 col-xs-3 border"><b>Nivel: <?=$_SESSION["nivel"]?></b></div>
-			<div id="top" class="col-md-3 col-xs-3 border">
-				<form action='dame_exp_premoh.php' method='POST'>
-					<input type="text" name="setexp"></input>
-					<input type="submit" style="width:10px"></input>
-				</form>
+			<div class="topmenu">
+				<div id="top" class="topuser"><div class="topuserimage"><b class="user" onclick="abrir_user()"> <?=$_SESSION["username"]?></b></div></div>
+				<div id="top" class="topuser"><div class="topuserimage"><b>Nivel: <?=$_SESSION["nivel"]?></b></div></div>
+				<div id="top" class="toplog"><div class="topuserimage"><b><a class="user" href="cerrar_sesion.php">Log Out</a></b></div></div>
+				<!-- <div id="top">
+					<form action='dame_exp_premoh.php' method='POST'>
+						<input type="text" name="setexp"></input>
+						<input type="submit" style="width:10px"></input>
+					</form>
+				</div> -->
 			</div>
-			<div id="top" class="col-md-3 col-xs-3 border"><a href="cerrar_sesion.php">Log Out</a></div>
 		</div>
 	<?php		
 		}	
@@ -128,6 +130,8 @@ session_start();
 							
 						?>
 						<p>Nivel: <?=$_SESSION["nivel"]?> </p><p> EXP: <span id="Userexp"></span>/<span id="Userexptotal"></span></p> <!-- CALCULAR LA EXPERIENCIA exp actual * 100% / exp nivel -->
+						<div class="borderexp">
+						</div>
 						<div class="progress progress-striped active">
 
 						  <div id="barraExp" class="progress-bar progress-bar-custom" role="progressbar" >
@@ -355,16 +359,15 @@ session_start();
 				<p>
 				Esto es un Monstruo de nivel 1 Ojcuro
 				</p>
-			</div>
-			<div class="imagenivel col-md-8 col-xs-12" >
-				<div class="Image1 col-md-12 col-xs-12" >
-				</div>
 				<div class="formsend " >
 					<form action="play.php" method="POST">
 						<input value="1" style="display:none" name="lvlid" />
-						<input type="submit" value="Jugar"/>
+						<input class="jugar" type="submit" value=""/>
 					</form>
 				</div>
+			</div>
+			<div class="imagenivel col-md-8 col-xs-12" >
+				<div class="Image1 col-md-12 col-xs-12"></div>
 			</div>
 		</div>
 		<div id="nivelmapa2" class="nivelmapa col-md-offset-3 col-md-9 col-xs-12">
@@ -376,16 +379,15 @@ session_start();
 				Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
 				Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 				</p>
-			</div>
-			<div class="imagenivel col-md-8 col-xs-12" >
-				<div class="Image2 col-md-12 col-xs-12" >
-				</div>
 				<div class="formsend " >
 					<form action="play.php" method="POST">
 						<input value="2" style="display:none" name="lvlid" />
-						<input type="submit" value="Jugar"/>
+						<input class="jugar" type="submit" value=""/>
 					</form>
 				</div>
+			</div>
+			<div class="imagenivel col-md-8 col-xs-12" >
+				<div class="Image2 col-md-12 col-xs-12"></div>
 			</div>
 		</div>
 		<div id="nivelmapa3" class="nivelmapa col-md-offset-3 col-md-9 col-xs-12">
@@ -397,16 +399,15 @@ session_start();
 				Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
 				Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 				</p>
-			</div>
-			<div class="imagenivel col-md-8 col-xs-12" >
-				<div class="Image3 col-md-12 col-xs-12" >
-				</div>
-				<div class="formsend " >
+				<div class="formsend">
 					<form action="play.php" method="POST">
 						<input value="3" style="display:none" name="lvlid" />
-						<input type="submit" value="Jugar"/>
+						<input class="jugar" type="submit" value=""/>
 					</form>
 				</div>
+			</div>
+			<div class="imagenivel col-md-8 col-xs-12" >
+				<div class="Image3 col-md-12 col-xs-12"></div>
 			</div>
 		</div>
 		<div id="nivelmapa4" class="nivelmapa col-md-offset-3 col-md-9 col-xs-12">
@@ -418,16 +419,15 @@ session_start();
 				Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
 				Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 				</p>
-			</div>
-			<div class="imagenivel col-md-8 col-xs-12" >
-				<div class="Image4 col-md-12 col-xs-12" >
-				</div>
-				<div class="formsend " >
+				<div class="formsend">
 					<form action="play.php" method="POST">
 						<input value="4" style="display:none" name="lvlid" />
-						<input type="submit" value="Jugar"/>
+						<input class="jugar" type="submit" value=""/>
 					</form>
 				</div>
+			</div>
+			<div class="imagenivel col-md-8 col-xs-12" >
+				<div class="Image4 col-md-12 col-xs-12"></div>
 			</div>
 		</div>
 		<div id="nivelmapa5" class="nivelmapa col-md-offset-3 col-md-9 col-xs-12">
@@ -439,16 +439,15 @@ session_start();
 				Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
 				Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 				</p>
-			</div>
-			<div class="imagenivel col-md-8 col-xs-12" >
-				<div class="Image5 col-md-12 col-xs-12" >
-				</div>
-				<div class="formsend " >
+				<div class="formsend">
 					<form action="play.php" method="POST">
 						<input value="5" style="display:none" name="lvlid" />
-						<input type="submit" value="Jugar"/>
+						<input class="jugar" type="submit" value=""/>
 					</form>
 				</div>
+			</div>
+			<div class="imagenivel col-md-8 col-xs-12" >
+				<div class="Image5 col-md-12 col-xs-12"></div>
 			</div>
 		</div>
 </body>
