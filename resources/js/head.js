@@ -13,6 +13,8 @@ tmp.column = -1;
 time = 5;
 tmp.move = 0;
 tmp.combo = 0;
+var exp = 0;
+var turn = 0;
 /* 1 = planta, 2 = fuego, 3 = agua, 4 = rayo, 5 = viento */ 
 tmp.levelMap = [[0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0]];
 for (var i = 0; i<5; i++) {
@@ -37,24 +39,36 @@ var windDamage = 0;
 
 function selectEnemy(object){
 	for(var i = 0; i<enemyList.length; i++){
-		enemyList[i].style.border = '3px solid black';
+		//enemyList[i].style.border = '3px solid black';
+		enemyList[i].style.backgroundImage = 'url("resources/img/pet' + enemyList[i].number + '.gif")';
 	}
 	enemy=object;
-	enemy.style.border =  '3px solid blue';
+	enemy.style.backgroundImage = 'url("resources/img/lockon.png"), url("resources/img/pet' +enemy.number + '.gif")';
+	//enemy.style.border =  '3px solid blue';
 }
 
 function checkResult(){
-	enemyList = document.getElementsByClassName('enemy');
+	//enemyList = document.getElementsByClassName('enemy');
 	console.log(enemyList, enemyList.length);
 	ally = document.getElementsByClassName('you');
 	if (enemyList.length < 1 && ally.length < 1){
 		alert('draw');
 	}
-	else if (!enemyList){
-		alert('win');
+	else if (enemyList.length <1){
+		var f = document.createElement('form');
+		f.action = 'index.php';
+		f.method = 'post'
+
+		var i=document.createElement('input');
+		i.type='hidden';
+		i.name='Experiencia';
+		i.value=exp;
+		f.appendChild(i);
+		document.body.appendChild(f);
+		f.submit();
 	}
 	else if (ally.length < 1){
-		alert('lose');
+		window.location ='index.php';
 	}
 }
 
@@ -117,7 +131,7 @@ function getMouse(object, event){
 			setTimeout(function(){
 				you.update({currentHP: you.currentHP - enemyDamage});
 				checkResult();
-			}, 1000)
+			}, 500)
 			
 		}
 			

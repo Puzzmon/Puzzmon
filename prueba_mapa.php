@@ -20,7 +20,8 @@
 			'Level' => 0,
 			'HP' => 0,
 			'Atk' => 0,
-			'Def' => 0
+			'Def' => 0,
+			'Exp' => 0
 		),
 		'enemy2' => array(
 			'ID' => 0,
@@ -77,6 +78,7 @@
 	$row = $row->fetch_assoc();
 	$response["enemy1"]["ID"] = (int)$row["Puzzmon_1"];
 	$response["enemy1"]["Level"] = (int)$row["Nivel_1"];
+	$response["enemy1"]["Exp"] = (int)$row["Experiencia"];
 
 
 	if ($row["Puzzmon_2"] != null){

@@ -79,11 +79,12 @@ window.onload = function(){
 			character.setAttribute('onclick', 'selectEnemy(this)');
 			
 		}
+		character.number = spec.id;
 		character.alive = 1;
 		character.name = spec.name;
 		character.style.width= '100px';
 		character.style.height = '100px';
-		character.style.border = '3px solid black';
+		//character.style.border = '3px solid black';
 		character.type = spec.type || 1;
 		character.attack = spec.attack || 10;
 		character.defense = spec.defense || 10;
@@ -100,21 +101,81 @@ window.onload = function(){
 		}
 		character.maxHP = spec.maxHP || 100;
 		character.currentHP = spec.currentHP || character.maxHP;
-		character.innerHTML = character.name + '('+character.typeName+'): ' + character.currentHP + ' / ' + character.maxHP;
+		character.progress = document.createElement('div');
+		character.bar = document.createElement('div');
+		character.progress.className = "myProgress";
+		character.bar.className = "myBar";
+		character.bar.width = 100;
+		character.bar.style.width = character.bar.width + '%';
+		character.progress.appendChild(character.bar);
+		character.appendChild(character.progress);
+		character.bar.move = function(spec){
+			var id = undefined;
+			var oldHealth = Math.ceil(spec.oldVal / character.maxHP * 100);
+			var newHealth = Math.ceil(spec.newVal / character.maxHP * 100);
+			var time = 0;
+			var background = character.style.backgroundImage;
+			console.log(background);
+			console.log(oldHealth, newHealth);
+			if (turn > 0){
+				if (spec.newVal > spec.oldVal){
+					id = setInterval(function(){
+						if (character.bar.width >= newHealth || character.bar.width >= 100) {
+							clearInterval(id);
+						} else {
+							character.bar.width++;
+							time++;
+							character.bar.style.width = character.bar.width + '%'; 
+							//document.getElementById("label").innerHTML = width * 1  + '%';
+						}
+					}, 10);
+				}
+				else if (spec.newVal <= spec.oldVal){
+					id = setInterval(function(){
+						if (character.bar.width <= newHealth || character.bar.width <= 0) {
+							character.style.backgroundImage = background;
+							clearInterval(id);
+							if (character.bar.width <= 0){
+								if(character.alive > 0){
+									character.parentNode.removeChild(character);
+									setTimeout(function(){checkResult()}, 500);
+									character.alive = 0;
+
+								}
+								if(document.getElementsByClassName('enemy').length >= 1)
+									selectEnemy(document.getElementsByClassName('enemy')[0]);
+							}
+						} else {
+							if (time >= 00 && time < 10){
+								character.style.backgroundImage = "";
+							}
+							else if (time >= 10 && time < 20){
+								character.style.backgroundImage = background;
+							}
+							else if (time >= 20){
+								time=0;
+							}
+							time++
+							character.bar.width--; 
+							character.bar.style.width = character.bar.width + '%'; 
+							//document.getElementById("label").innerHTML = width * 1  + '%';
+						}
+					}, 10);
+				}
+			}
+
+			return character.bar;
+		}
+
+		//character.innerHTML = character.name + '('+character.typeName+'): ' + character.currentHP + ' / ' + character.maxHP;
 		character.update = function(spec){
+			character.bar.move({newVal: spec.currentHP, oldVal: character.currentHP});
 			character.currentHP = spec.currentHP;
 			if(character.currentHP >= character.maxHP)
 				character.currentHP = character.maxHP;
-			character.innerHTML = character.name + '('+character.typeName+'): ' + character.currentHP + ' / ' + character.maxHP;
+			//character.innerHTML = character.name + '('+character.typeName+'): ' + character.currentHP + ' / ' + character.maxHP;
 			if (character.currentHP <=0){
 				character.currentHP = 0;
-				if(character.alive > 0){
-					character.parentNode.removeChild(character);
-					character.alive = 0;
-
-				}
-				if(document.getElementsByClassName('enemy').length >= 1)
-					selectEnemy(document.getElementsByClassName('enemy')[0]);
 			}
 			
 				//character.innerHTML = 'DEAD';
@@ -126,6 +187,8 @@ window.onload = function(){
 
 	function printMap(object){
 		console.log(object);
+		exp = object.enemy1.Exp;
+		console.log(exp);
 		you = newCharacter({
 			id: object.character.ID,
 			maxHP: object.character.HP,
@@ -182,7 +245,7 @@ window.onload = function(){
 		for(var i = 0; i < enemyList.length; i++){
 			enemyList[i].update({currentHP: enemyList[i].maxHP});
 		}
-		
+		turn=1;
 		tmp.points=0;
 	}
 

@@ -6,13 +6,16 @@ session_start();
 <head>
 	<meta charset="UTF-8">
 	<title></title>
+	<script src="resources/js/jquery.js"></script>
+	<script src="resources/js/bootstrap.js"></script>
 	<script src="resources/js/head.js"></script>
 	<?php
 		if (isset($_POST["lvlid"]))
 			$levelID = $_POST["lvlid"];
-		else $levelID = 1;
+		else header('location: index.php');
 		echo '<script> levelID = '.$levelID.'</script>';
 	 ?>
+	 <link rel="stylesheet" href="resources/css/bootstrap.css">
 </head>
 	
 <body>
@@ -55,6 +58,18 @@ session_start();
 		}
 		#points{
 			text-align: center;
+		}
+		.myProgress {
+		    position: relative;
+		    width: 60%;
+		    height: 10px;
+		    margin: auto;
+		    background-color: grey;
+		}
+		.myBar {
+		    position: absolute;
+		    height: 100%;
+		    background-color: green;
 		}
 	</style>
 	<div id="game">
