@@ -381,7 +381,10 @@ session_start();
 				<div class="Image2 col-md-12 col-xs-12" >
 				</div>
 				<div class="formsend " >
-					<input type="submit" value="Jugar"/>
+					<form action="play.php" method="POST">
+						<input value="2" style="display:none" name="lvlid" />
+						<input type="submit" value="Jugar"/>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -399,7 +402,10 @@ session_start();
 				<div class="Image3 col-md-12 col-xs-12" >
 				</div>
 				<div class="formsend " >
-					<input type="submit" value="Jugar"/>
+					<form action="play.php" method="POST">
+						<input value="3" style="display:none" name="lvlid" />
+						<input type="submit" value="Jugar"/>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -417,7 +423,10 @@ session_start();
 				<div class="Image4 col-md-12 col-xs-12" >
 				</div>
 				<div class="formsend " >
-					<input type="submit" value="Jugar"/>
+					<form action="play.php" method="POST">
+						<input value="4" style="display:none" name="lvlid" />
+						<input type="submit" value="Jugar"/>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -435,7 +444,10 @@ session_start();
 				<div class="Image5 col-md-12 col-xs-12" >
 				</div>
 				<div class="formsend " >
-					<input type="submit" value="Jugar"/>
+					<form action="play.php" method="POST">
+						<input value="5" style="display:none" name="lvlid" />
+						<input type="submit" value="Jugar"/>
+					</form>
 				</div>
 			</div>
 		</div>
