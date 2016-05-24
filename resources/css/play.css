@@ -3,7 +3,9 @@ html{
 }
 body{
 	height: 100%;
-	background-color: pink;
+	background-image: url("../img/fondoplay.jpg");
+	background-size: 100%;
+	background-repeat:no-repeat;
 }
 .border{
 	border:1px solid red;
