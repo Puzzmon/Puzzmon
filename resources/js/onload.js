@@ -279,11 +279,11 @@ window.onload = function(){
 		enemyList = document.getElementsByClassName('enemy');
 		allyZone.appendChild(you);
 		checkGrid();
-		you.update({currentHP: you.maxHP});
+		setTimeout(function(){turn = 1;}, 1000);
+		/*you.update({currentHP: you.maxHP});
 		for(var i = 0; i < enemyList.length; i++){
 			enemyList[i].update({currentHP: enemyList[i].maxHP});
-		}
-		turn=1;
+		}*/
 		tmp.points=0;
 	}
 

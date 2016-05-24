@@ -136,6 +136,7 @@ function getMouse(object, event){
 				elecDamage = 0;
 				windDamage = 0;
 			}
+			
 			setTimeout(function(){
 				you.update({currentHP: you.currentHP - enemyDamage});
 				//checkResult();

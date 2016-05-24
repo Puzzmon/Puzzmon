@@ -7,7 +7,7 @@ include 'connection.php';
 include 'checkNivel.php';
 	
 	$setexp = $_POST["setexp"];
-	$setunlock = $_POST["unlock"] || 0;
+	$setunlock = (int)$_POST["unlock"] || 0;
 
 	$conn = connect();
 		
@@ -18,13 +18,11 @@ include 'checkNivel.php';
 	    echo "error";
 	}
 	$row = $row->fetch_assoc();
+	echo $row["nivelmapa"];
 
 	$exp = $row["Exp_actual"];
-	if ($setunlock == $row["nivelmapa"]){
-		$setunlock = $row["nivelmapa"] + 1;
-	}
-	else{
-		$setunlock = $row["nivelmapa"];
+	if ($setunlock == (int)$row["nivelmapa"]){
+		$setunlock = $setunlock+1;
 	}
 
 	$nuevaexp = $setexp + $exp;
