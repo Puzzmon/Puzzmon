@@ -6,10 +6,11 @@ window.onload = function(){
 		circle = document.createElement('img');
 		/*circle.style.width = '50px';
 		circle.style.height = '50px';*/
-		circle.src = 'resources/img/' + (spec.src ||'circle.png');
-		circle.className = spec.className || '';
+		circle.src = 'resources/img/circle' + (spec.val ||'') + '.png';
+		circle.className = 'type-' + spec.val;
 		circle.draggable = false;
 		circle.setAttribute('value', spec.val);
+		circle.style.opacity = spec.opacity || '1';
 		//circle.style.position = 'absolute';
 		return circle;
 	}
@@ -30,6 +31,35 @@ window.onload = function(){
 			td.row = i;
 			td.column = j;
 			td.className = 'row-' +i + ' column-'+j || '';
+			td.changeCircle = function(value){
+				td.firstChild.style.opacity = 1;
+				var change = 0;
+				if (turn > 0){
+					td.itv = setInterval(function(){
+						if (change == 0){
+							td.firstChild.style.opacity-= 0.1
+							if (td.firstChild.style.opacity <= 0){
+								td.firstChild.style.opacity= 0;
+								td.replaceChild(newCircle({val: value}), td.firstChild);
+								change = 1;
+								td.firstChild.style.opacity = 1;
+
+							}
+						}
+						else{
+							clearInterval(td.itv);
+						}
+					
+					},50);
+					//checkGrid();
+				}
+				else{
+					//turn = 1;
+					td.replaceChild(newCircle({val: value}), td.firstChild);
+					//checkGrid();
+				}
+			}
+
 			return td;
 		}
 
@@ -38,8 +68,8 @@ window.onload = function(){
 				var tr = newTr();
 				for (var j=0; j<5; j++){
 					var td = newTd(i, j);
-					var className = 'type-'+grid.pattern[i][j];
-					td.appendChild(newCircle({src: 'circle'+grid.pattern[i][j]+'.png', className: className,i: i, j: j, val: grid.pattern[i][j]}));
+					//var className = 'type-'+grid.pattern[i][j];
+					td.appendChild(newCircle({val: grid.pattern[i][j]}));
 					tr.appendChild(td);
 				}
 				grid.appendChild(tr);
@@ -84,6 +114,7 @@ window.onload = function(){
 		character.name = spec.name;
 		character.style.width= '100px';
 		character.style.height = '100px';
+		character.aimed = false;
 		//character.style.border = '3px solid black';
 		character.type = spec.type || 1;
 		character.attack = spec.attack || 10;
@@ -114,7 +145,13 @@ window.onload = function(){
 			var oldHealth = Math.ceil(spec.oldVal / character.maxHP * 100);
 			var newHealth = Math.ceil(spec.newVal / character.maxHP * 100);
 			var time = 0;
-			var background = character.style.backgroundImage;
+			var background;
+			if (character.aimed == true){
+			 background = 'url("resources/img/lockon.png"), url("resources/img/pet' +character.number + '.gif")';
+			}
+			else{
+				background = 'url("resources/img/pet' +character.number + '.gif")';
+			}
 			console.log(background);
 			console.log(oldHealth, newHealth);
 			if (turn > 0){
@@ -146,10 +183,11 @@ window.onload = function(){
 									selectEnemy(document.getElementsByClassName('enemy')[0]);
 							}
 						} else {
-							if (time >= 00 && time < 10){
+							if (time >= 0 && time < 10){
 								character.style.backgroundImage = "";
 							}
 							else if (time >= 10 && time < 20){
+
 								character.style.backgroundImage = background;
 							}
 							else if (time >= 20){

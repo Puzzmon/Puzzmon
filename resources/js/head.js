@@ -41,9 +41,11 @@ function selectEnemy(object){
 	for(var i = 0; i<enemyList.length; i++){
 		//enemyList[i].style.border = '3px solid black';
 		enemyList[i].style.backgroundImage = 'url("resources/img/pet' + enemyList[i].number + '.gif")';
+		enemyList[i].aimed = false;
 	}
 	enemy=object;
 	enemy.style.backgroundImage = 'url("resources/img/lockon.png"), url("resources/img/pet' +enemy.number + '.gif")';
+	enemy.aimed = true;
 	//enemy.style.border =  '3px solid blue';
 }
 
@@ -364,6 +366,7 @@ function checkGrid(){
 	for (var i=0; i<5;i++){
 		//console.log(pos.row[i]);
 		if (pos.row[i]){
+			var thisRow = document.getElementsByClassName('row-' + i);
 			var j = pos.row[i].consecutive;
 			j--;
 			var x = pos.row[i].i;
@@ -382,13 +385,17 @@ function checkGrid(){
 					case "4": elecDamage++; break;
 					case "5": windDamage++; break;
 				}
-				tmp.levelMap[x][y-j] = Math.floor((Math.random() * 5) + 1);
-				map.changePattern({pattern: tmp.levelMap});
+				var value = Math.floor((Math.random() * 5) + 1);
+				tmp.levelMap[x][y-j] = value;
+				thisRow[y-j].changeCircle(value);
+				//thisRow[y-j].appendChild(newCircle({val: value}));
+				
 				
 			}
 			tmp.combo++;
 		}
 		if (pos.column[i]){
+			var thisColumn = document.getElementsByClassName('column-' + i);
 			console.log(pos.column[i]);
 			var j = pos.column[i].consecutive;
 			j--;
@@ -408,8 +415,12 @@ function checkGrid(){
 					case "4": elecDamage++; break;
 					case "5": windDamage++; break;
 				}
-				tmp.levelMap[x-j][y] = Math.floor((Math.random() * 5) + 1);
-				map.changePattern({pattern: tmp.levelMap});
+				var value = Math.floor((Math.random() * 5) + 1);
+				tmp.levelMap[x-j][y] = value;
+				thisColumn[x-j].changeCircle(value);
+				//thisColumn[x-j].appendChild(newCircle({val: value}));
+				
+				//map.changePattern({pattern: tmp.levelMap});
 				
 			}
 			tmp.combo++;
@@ -417,7 +428,7 @@ function checkGrid(){
 	}
 	if (tmp.combo>0){
 		tmp.combo = 0;
-		checkGrid();
+		setTimeout(function(){checkGrid()}, 550);	
 	}
 	var heal = 0;
 	if (grassDamage >= 5 || fireDamage >= 5 || waterDamage >=5 || elecDamage >= 5 || windDamage >=5){
