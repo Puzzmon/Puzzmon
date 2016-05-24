@@ -24,7 +24,7 @@ session_start();
 		$_SESSION['email'] = $row["Email"];
 		$_SESSION['exp'] = $row["Exp_actual"];
 		$_SESSION['nivel'] = $row["Nivel"];
-		$_SESSION['mascota'] = $row["Puzzmon_id"];
+		$_SESSION['mascota'] = $row["Puzzmon_Id"];
 		$_SESSION['nivelmapa'] = $row["nivelmapa"];
 		
 		$sql = "SELECT experiencia FROM experiencia WHERE nivel = '".$_SESSION['nivel']."';";
