@@ -58,14 +58,19 @@ function checkResult(){
 	}
 	else if (enemyList.length <1){
 		var f = document.createElement('form');
-		f.action = 'index.php';
+		f.action = 'dame_exp_premoh.php';
 		f.method = 'post'
 
 		var i=document.createElement('input');
 		i.type='hidden';
-		i.name='Experiencia';
+		i.name='setexp';
 		i.value=exp;
+		var i2=document.createElement('input');
+		i2.type='hidden';
+		i2.name='unlock';
+		i2.value=1;
 		f.appendChild(i);
+		f.appendChild(i2);
 		document.body.appendChild(f);
 		f.submit();
 	}
@@ -428,7 +433,9 @@ function checkGrid(){
 	}
 	if (tmp.combo>0){
 		tmp.combo = 0;
-		setTimeout(function(){checkGrid()}, 550);	
+		setTimeout(function(){
+			checkGrid();
+		}, 550);	
 	}
 	var heal = 0;
 	if (grassDamage >= 5 || fireDamage >= 5 || waterDamage >=5 || elecDamage >= 5 || windDamage >=5){
@@ -437,7 +444,7 @@ function checkGrid(){
 		
 	var damage = checkDamage({characterAttack: you.attack, enemyDefense: enemy.defense, characterType: you.type, enemyType: enemy.type});
 	console.log('Total Damage: '+ damage + ', grass: ' + grassDamage + ', fire: ' + fireDamage + ', water: ' + waterDamage + ', electric: ' + elecDamage + ', wind: ' + windDamage);
-	enemy.update({currentHP: enemy.currentHP - damage});
+	if (turn > 0) enemy.update({currentHP: enemy.currentHP - damage});
 	if (heal > 0){
 		you.update({currentHP: you.currentHP + damage});
 		console.log(you.currentHP + (damage/2));

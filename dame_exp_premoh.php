@@ -7,6 +7,7 @@ include 'connection.php';
 include 'checkNivel.php';
 	
 	$setexp = $_POST["setexp"];
+	$setunlock = $_POST["unlock"] || 0;
 
 	$conn = connect();
 		
@@ -19,12 +20,18 @@ include 'checkNivel.php';
 	$row = $row->fetch_assoc();
 
 	$exp = $row["Exp_actual"];
+	if ($setunlock == $row["nivelmapa"]){
+		$setunlock = $row["nivelmapa"] + 1;
+	}
+	else{
+		$setunlock = $row["nivelmapa"];
+	}
 
 	$nuevaexp = $setexp + $exp;
 
 
 
-    $sql = "UPDATE usuarios SET Exp_actual= '".$nuevaexp."' WHERE Id = '".$_SESSION['id']."'"; //Creamos el select
+    $sql = "UPDATE usuarios SET Exp_actual= '".$nuevaexp."', nivelmapa = '".$setunlock."' WHERE Id = '".$_SESSION['id']."'"; //Creamos el select
 	$row = $conn->query($sql);
 
 	if($row === FALSE) { 
