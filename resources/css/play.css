@@ -27,11 +27,43 @@ body{
 	height:100%;
 }
 
-#battle{
+div.nivel1{
 	margin: 5px 0px;
 	text-align: center;
 	height: 40%;
 	background-image: url('../img/fondos/viento.jpg');
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+div.nivel2{
+	margin: 5px 0px;
+	text-align: center;
+	height: 40%;
+	background-image: url('../img/fondos/agua.jpg');
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+div.nivel3{
+	margin: 5px 0px;
+	text-align: center;
+	height: 40%;
+	background-image: url('../img/fondos/.jpg');
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+div.nivel4{
+	margin: 5px 0px;
+	text-align: center;
+	height: 40%;
+	background-image: url('../img/fondos/fuego.jpg');
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+div.nivel5{
+	margin: 5px 0px;
+	text-align: center;
+	height: 40%;
+	background-image: url('../img/fondos/planta.jpg');
 	background-size: 100%;
 	background-repeat: no-repeat;
 }

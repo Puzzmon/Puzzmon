@@ -211,7 +211,7 @@ session_start();
 					
 					$nivelmapa = $row['nivelmapa'];
 
-				if($nivelmapa == 5)
+				if($nivelmapa >= 5)
 				{
 				?>
 				<div id="niveles" class="niveles">

@@ -11,7 +11,10 @@ session_start();
 	<script src="resources/js/head.js"></script>
 	<?php
 		if (isset($_POST["lvlid"]))
+		{
 			$levelID = $_POST["lvlid"];
+			$classlvl = 'nivel'.$levelID;
+		}
 		else header('location: index.php');
 		echo '<script> levelID = '.$levelID.'</script>';
 	 ?>
@@ -23,7 +26,7 @@ session_start();
 		<div class="left border col-md-4 col-xs-1"></div>
 		<div class="game border col-md-4 col-xs-10">
 			<div id="game">
-		<div id="battle" class="border">
+		<div id="battle" class="<?=$classlvl?> border">
 			<div id="enemyZone" class="border"></div>
 			<div id="allyZone" class="border"></div>
 		</div>
