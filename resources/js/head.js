@@ -95,6 +95,7 @@ function getMouse(object, event){
 		for (var i = 0, j=0; i<cells.length; j++){
 			for(var k = 0; k<5; k++, i++){
 				cells[i].setAttribute('onmouseover', '');
+				cells[i].setAttribute('onmouseout', '');
 				cells[i].style.backgroundColor = '';
 				tmp.levelMap[j][k] = cells[i].firstChild.getAttribute('value');
 			}	
@@ -136,6 +137,7 @@ function getMouse(object, event){
 		}
 			
 		tmp.move=0;
+		document.onmouseup = "";
 
 	}
 }

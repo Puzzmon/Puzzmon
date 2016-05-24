@@ -54,7 +54,7 @@
 	$response["character"]["ID"] = (int)$row["Puzzmon_Id"];
 	$response["character"]["Level"] = (int)$row["Nivel"];
 
-	$sql = "SELECT * FROM Monstruos WHERE Id = ".$response["character"]["ID"].";";
+	$sql = "SELECT * FROM monstruos WHERE Id = ".$response["character"]["ID"].";";
 	$row = $conn->query($sql);
 	if($row === FALSE) { 
 	    die(mysql_error()); // TODO: better error handling
@@ -90,7 +90,7 @@
 		$response["enemy3"]["Level"] = (int)$row["Nivel_3"];
 	}
 
-	$sql = "SELECT * FROM Monstruos WHERE Id = ".$response["enemy1"]["ID"].";";
+	$sql = "SELECT * FROM monstruos WHERE Id = ".$response["enemy1"]["ID"].";";
 	$row = $conn->query($sql);
 	if($row === FALSE) { 
 	    die(mysql_error()); // TODO: better error handling
@@ -104,7 +104,7 @@
 	$response["enemy1"]["Def"] = floor($row["Def_Base"] + $row["Def_Base"] * $row["Def_Inc"] * ($response["enemy1"]["Level"] -1)); 
 
 	if($response["enemy2"]["ID"] != 0){
-		$sql = "SELECT * FROM Monstruos WHERE Id = ".$response["enemy2"]["ID"].";";
+		$sql = "SELECT * FROM monstruos WHERE Id = ".$response["enemy2"]["ID"].";";
 		$row = $conn->query($sql);
 		if($row === FALSE) { 
 		    die(mysql_error()); // TODO: better error handling
@@ -119,7 +119,7 @@
 	}
 
 	if($response["enemy3"]["ID"] != 0){
-		$sql = "SELECT * FROM Monstruos WHERE Id = ".$response["enemy3"]["ID"].";";
+		$sql = "SELECT * FROM monstruos WHERE Id = ".$response["enemy3"]["ID"].";";
 		$row = $conn->query($sql);
 		if($row === FALSE) { 
 		    die(mysql_error()); // TODO: better error handling
