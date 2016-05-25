@@ -11,74 +11,32 @@ session_start();
 	<script src="resources/js/head.js"></script>
 	<?php
 		if (isset($_POST["lvlid"]))
+		{
 			$levelID = $_POST["lvlid"];
+			$classlvl = 'nivel'.$levelID;
+		}
 		else header('location: index.php');
 		echo '<script> levelID = '.$levelID.'</script>';
 	 ?>
 	 <link rel="stylesheet" href="resources/css/bootstrap.css">
+	 <link rel="stylesheet" href="resources/css/play.css">
 </head>
-	
 <body>
-	<style>
-		html{
-			height: 100%;
-		}
-		body{
-			height: 100%;
-			background-color: pink;
-			-webkit-touch-callout: none;
-		    -webkit-user-select: none;
-		    -khtml-user-select: none;
-		    -moz-user-select: none;
-		    -ms-user-select: none;
-		    user-select: none;}
-		#game{
-			width: 500px;
-			height: 100%;
-
-			
-		}
-		#battle{
-			text-align: center;
-			height: 40%;
-			
-		}
-		#enemyZone{
-			margin: auto;
-			height: 50%;
-		}
-		#allyZone{
-			margin: auto;
-			height: 50%;
-		}
-		#grid{
-			margin: auto;
-			width: 70%;
-			height: 55%;
-		}
-		#points{
-			text-align: center;
-		}
-		.myProgress {
-		    position: relative;
-		    width: 60%;
-		    height: 10px;
-		    margin: auto;
-		    background-color: grey;
-		}
-		.myBar {
-		    position: absolute;
-		    height: 100%;
-		    background-color: green;
-		}
-	</style>
-	<div id="game">
-		<div id="battle">
-			<div id="enemyZone"></div>
-			<div id="allyZone"></div>
+	<div id="content" class="">
+		<div class="left  col-md-4 col-xs-1"></div>
+		<div class="game  col-md-4 col-xs-10">
+			<div id="game">
+		<div id="battle" class="<?=$classlvl?> ">
+			<div id="enemyZone" class=""></div>
+			<div id="allyZone" class=""></div>
 		</div>
-		<div id="grid"></div>
+		<div id="grid" class=""></div>
+	</div> 
+		</div>
+		<div class="right  col-md-4 col-xs-1"></div>
 	</div>
+
+	
 <script src="resources/js/onload.js"></script>
 
 </body>

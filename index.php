@@ -366,7 +366,7 @@ session_start();
 					</form>
 				</div>
 			</div>
-			<div class="imagenivel col-md-8 col-xs-12" >
+			<div class="imagenivel pagina2 col-md-8 col-xs-12" >
 				<div class="Image1 col-md-12 col-xs-12"></div>
 			</div>
 		</div>
@@ -385,8 +385,9 @@ session_start();
 						<input class="jugar" type="submit" value=""/>
 					</form>
 				</div>
+
 			</div>
-			<div class="imagenivel col-md-8 col-xs-12" >
+			<div class="imagenivel pagina2 col-md-8 col-xs-12" >
 				<div class="Image2 col-md-12 col-xs-12"></div>
 			</div>
 		</div>
@@ -406,7 +407,7 @@ session_start();
 					</form>
 				</div>
 			</div>
-			<div class="imagenivel col-md-8 col-xs-12" >
+			<div class="imagenivel pagina2 col-md-8 col-xs-12" >
 				<div class="Image3 col-md-12 col-xs-12"></div>
 			</div>
 		</div>
@@ -426,7 +427,7 @@ session_start();
 					</form>
 				</div>
 			</div>
-			<div class="imagenivel col-md-8 col-xs-12" >
+			<div class="imagenivel pagina2 col-md-8 col-xs-12" >
 				<div class="Image4 col-md-12 col-xs-12"></div>
 			</div>
 		</div>
@@ -446,7 +447,7 @@ session_start();
 					</form>
 				</div>
 			</div>
-			<div class="imagenivel col-md-8 col-xs-12" >
+			<div class="imagenivel pagina2 col-md-8 col-xs-12" >
 				<div class="Image5 col-md-12 col-xs-12"></div>
 			</div>
 		</div>

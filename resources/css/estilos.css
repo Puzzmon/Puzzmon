@@ -371,6 +371,23 @@ body {
  font-family: 'radical';
  src: url('../fonts/radical.ttf');
 }
+.cambiarpagina{
+	position:absolute;
+	bottom:0;
+	height:20px;
+	width:90%;
+}
+@media screen and (max-height: 800px) and (max-width: 550px)  {
+	.pagina2{
+	display:none;
+	}
+}
+.pag1{
+	height:100%;
+}
+.pag2{
+	height:100%;
+}
 
 
 
