@@ -286,7 +286,6 @@ window.onload = function(){
 			enemyList[i].update({currentHP: enemyList[i].maxHP});
 		}
 		tmp.points=0;
-		turn = 1;
 	}
 
 	function ajaxCall(url, jsonObject, fn){

@@ -462,4 +462,5 @@ function checkGrid(){
 	grassDamage = 0;
 	elecDamage = 0;
 	windDamage = 0;
+	turn = 1;
 }
