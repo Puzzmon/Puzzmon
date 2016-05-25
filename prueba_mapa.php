@@ -21,7 +21,8 @@
 			'HP' => 0,
 			'Atk' => 0,
 			'Def' => 0,
-			'Exp' => 0
+			'Exp' => 0,
+			'Unlock' => 1
 		),
 		'enemy2' => array(
 			'ID' => 0,
@@ -79,6 +80,7 @@
 	$response["enemy1"]["ID"] = (int)$row["Puzzmon_1"];
 	$response["enemy1"]["Level"] = (int)$row["Nivel_1"];
 	$response["enemy1"]["Exp"] = (int)$row["Experiencia"];
+	$response["enemy1"]["Unlock"] = (int)$row["Dificultad"];
 
 
 	if ($row["Puzzmon_2"] != null){

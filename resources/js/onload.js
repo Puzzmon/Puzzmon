@@ -154,7 +154,7 @@ window.onload = function(){
 			}
 			console.log(background);
 			console.log(oldHealth, newHealth);
-			if (turn > 0){
+
 				if (spec.newVal > spec.oldVal){
 					id = setInterval(function(){
 						if (character.bar.width >= newHealth || character.bar.width >= 100) {
@@ -200,22 +200,23 @@ window.onload = function(){
 						}
 					}, 10);
 				}
-			}
 
 			return character.bar;
 		}
 
 		//character.innerHTML = character.name + '('+character.typeName+'): ' + character.currentHP + ' / ' + character.maxHP;
 		character.update = function(spec){
-			character.bar.move({newVal: spec.currentHP, oldVal: character.currentHP});
-			character.currentHP = spec.currentHP;
-			if(character.currentHP >= character.maxHP)
-				character.currentHP = character.maxHP;
-			//character.innerHTML = character.name + '('+character.typeName+'): ' + character.currentHP + ' / ' + character.maxHP;
-			if (character.currentHP <=0){
-				character.currentHP = 0;
+			if (turn > 0){
+				character.bar.move({newVal: spec.currentHP, oldVal: character.currentHP});
+				character.currentHP = spec.currentHP;
+				if(character.currentHP >= character.maxHP)
+					character.currentHP = character.maxHP;
+				//character.innerHTML = character.name + '('+character.typeName+'): ' + character.currentHP + ' / ' + character.maxHP;
+				if (character.currentHP <=0){
+					character.currentHP = 0;
+				}
 			}
-			
+				
 				//character.innerHTML = 'DEAD';
 			return character;
 		}
@@ -226,7 +227,8 @@ window.onload = function(){
 	function printMap(object){
 		console.log(object);
 		exp = object.enemy1.Exp;
-		console.log(exp);
+		unlock = object.enemy1.Unlock;
+		console.log(unlock);
 		you = newCharacter({
 			id: object.character.ID,
 			maxHP: object.character.HP,
@@ -279,12 +281,12 @@ window.onload = function(){
 		enemyList = document.getElementsByClassName('enemy');
 		allyZone.appendChild(you);
 		checkGrid();
-		setTimeout(function(){turn = 1;}, 1000);
-		/*you.update({currentHP: you.maxHP});
+		you.update({currentHP: you.maxHP});
 		for(var i = 0; i < enemyList.length; i++){
 			enemyList[i].update({currentHP: enemyList[i].maxHP});
-		}*/
+		}
 		tmp.points=0;
+		turn = 1;
 	}
 
 	function ajaxCall(url, jsonObject, fn){

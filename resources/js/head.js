@@ -14,6 +14,7 @@ time = 5;
 tmp.move = 0;
 tmp.combo = 0;
 var exp = 0;
+var unlock;
 var turn = 0;
 /* 1 = planta, 2 = fuego, 3 = agua, 4 = rayo, 5 = viento */ 
 tmp.levelMap = [[0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0]];
@@ -68,7 +69,7 @@ function checkResult(){
 		var i2=document.createElement('input');
 		i2.type='hidden';
 		i2.name='unlock';
-		i2.value=1;
+		i2.value=unlock;
 		f.appendChild(i);
 		f.appendChild(i2);
 		document.body.appendChild(f);
@@ -140,7 +141,7 @@ function getMouse(object, event){
 			setTimeout(function(){
 				you.update({currentHP: you.currentHP - enemyDamage});
 				//checkResult();
-			}, 500)
+			}, 300)
 			
 		}
 			
@@ -299,11 +300,16 @@ function checkBoost(spec){
 }
 
 function checkDamage(spec){
-	grassDamage= (spec.characterAttack * (1 + (grassDamage - 3) / 4) * checkBoost({characterType: spec.characterType, damageType: 1}) * checkEffectivity({enemyType: spec.enemyType, damageType: 1})) -spec.enemyDefense;
-	fireDamage= (spec.characterAttack * (1 + (fireDamage - 3) / 4) * checkBoost({characterType: spec.characterType, damageType: 2}) * checkEffectivity({enemyType: spec.enemyType, damageType: 2})) -spec.enemyDefense;
-	waterDamage= (spec.characterAttack * (1 + (waterDamage - 3) / 4) * checkBoost({characterType: spec.characterType, damageType: 3}) * checkEffectivity({enemyType: spec.enemyType, damageType: 3})) -spec.enemyDefense;
-	elecDamage= (spec.characterAttack * (1 + (elecDamage - 3) / 4) * checkBoost({characterType: spec.characterType, damageType: 4}) * checkEffectivity({enemyType: spec.enemyType, damageType: 4})) -spec.enemyDefense;
-	windDamage= (spec.characterAttack * (1 + (windDamage - 3) / 4) * checkBoost({characterType: spec.characterType, damageType: 5}) * checkEffectivity({enemyType: spec.enemyType, damageType: 5})) -spec.enemyDefense;
+	if (grassDamage >= 3)
+		grassDamage= (spec.characterAttack * (1 + (grassDamage - 3) / 4) * checkBoost({characterType: spec.characterType, damageType: 1}) * checkEffectivity({enemyType: spec.enemyType, damageType: 1})) -spec.enemyDefense;
+	if (fireDamage >= 3)
+		fireDamage= (spec.characterAttack * (1 + (fireDamage - 3) / 4) * checkBoost({characterType: spec.characterType, damageType: 2}) * checkEffectivity({enemyType: spec.enemyType, damageType: 2})) -spec.enemyDefense;
+	if (waterDamage >= 3)
+		waterDamage= (spec.characterAttack * (1 + (waterDamage - 3) / 4) * checkBoost({characterType: spec.characterType, damageType: 3}) * checkEffectivity({enemyType: spec.enemyType, damageType: 3})) -spec.enemyDefense;
+	if (elecDamage >= 3)
+		elecDamage= (spec.characterAttack * (1 + (elecDamage - 3) / 4) * checkBoost({characterType: spec.characterType, damageType: 4}) * checkEffectivity({enemyType: spec.enemyType, damageType: 4})) -spec.enemyDefense;
+	if (windDamage >= 3)
+		windDamage= (spec.characterAttack * (1 + (windDamage - 3) / 4) * checkBoost({characterType: spec.characterType, damageType: 5}) * checkEffectivity({enemyType: spec.enemyType, damageType: 5})) -spec.enemyDefense;
 
 	if(grassDamage <= 0)
 		grassDamage = 0;
@@ -445,7 +451,7 @@ function checkGrid(){
 		
 	var damage = checkDamage({characterAttack: you.attack, enemyDefense: enemy.defense, characterType: you.type, enemyType: enemy.type});
 	console.log('Total Damage: '+ damage + ', grass: ' + grassDamage + ', fire: ' + fireDamage + ', water: ' + waterDamage + ', electric: ' + elecDamage + ', wind: ' + windDamage);
-	if (turn > 0) enemy.update({currentHP: enemy.currentHP - damage});
+	enemy.update({currentHP: enemy.currentHP - damage});
 	if (heal > 0){
 		you.update({currentHP: you.currentHP + damage});
 		console.log(you.currentHP + (damage/2));
