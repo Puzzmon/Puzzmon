@@ -26,12 +26,12 @@ session_start();
 		<div class="left  col-md-4 col-xs-1"></div>
 		<div class="game  col-md-4 col-xs-10">
 			<div id="game">
-		<div id="battle" class="<?=$classlvl?> ">
-			<div id="enemyZone" class=""></div>
-			<div id="allyZone" class=""></div>
-		</div>
-		<div id="grid" class=""></div>
-	</div> 
+				<div id="battle" class="<?=$classlvl?> ">
+					<div id="enemyZone" class=""></div>
+					<div id="allyZone" class=""></div>
+				</div>
+				<div id="grid" class=""></div>
+			</div> 
 		</div>
 		<div class="right  col-md-4 col-xs-1"></div>
 	</div>

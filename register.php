@@ -18,12 +18,12 @@ session_start();
         $conn->close();
 
 	}
-	if(createUser($_POST["username"],$_POST["password"],$_POST["email"],$_POST["tipo"]))
+	if(createUser(base64_encode($_POST["username"]),md5($_POST["password"]),$_POST["email"],$_POST["tipo"]))
 	{
 	session_unset();
 		$conn = connect();
-		$user = $_POST["username"];
-		$pass = $_POST["password"];
+		$user = base64_encode($_POST["username"]);
+		$pass = md5($_POST["password"]);
 		//echo $user . " " . $pass;
 	
 		$sql = "SELECT * FROM usuarios WHERE Usuario = '".$user."'  AND Contraseña = '".$pass."';";
@@ -34,8 +34,7 @@ session_start();
 		}
 		$row = $row->fetch_assoc();
 		$_SESSION['id'] = $row["Id"];
-		$_SESSION['username'] = $row["Usuario"];
-		$_SESSION['passw'] = $row["Contraseña"];
+		$_SESSION['username'] = base64_decode($row["Usuario"]);
 		$_SESSION['email'] = $row["Email"];
 		$_SESSION['exp'] = $row["Exp_actual"];
 		$_SESSION['nivel'] = $row["Nivel"];

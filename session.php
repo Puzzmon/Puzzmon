@@ -7,8 +7,8 @@ session_start();
 
 	if (isset($_POST["logg"])){
 
-		$user = $_POST["username"];
-		$pass = $_POST["password"];
+		$user = base64_encode($_POST["username"]);
+		$pass = md5($_POST["password"]);
 		//echo $user . " " . $pass;
 		include "connection.php";
 		$conn = connect();
@@ -20,7 +20,7 @@ session_start();
 		}
 		$row = $row->fetch_assoc();
 		$_SESSION['id'] = $row["Id"];
-		$_SESSION['username'] = $row["Usuario"];
+		$_SESSION['username'] = base64_decode($row["Usuario"]);
 		$_SESSION['email'] = $row["Email"];
 		$_SESSION['exp'] = $row["Exp_actual"];
 		$_SESSION['nivel'] = $row["Nivel"];

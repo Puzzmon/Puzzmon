@@ -302,14 +302,19 @@ function checkBoost(spec){
 function checkDamage(spec){
 	if (grassDamage >= 3)
 		grassDamage= (spec.characterAttack * (1 + (grassDamage - 3) / 4) * checkBoost({characterType: spec.characterType, damageType: 1}) * checkEffectivity({enemyType: spec.enemyType, damageType: 1})) -spec.enemyDefense;
+	else grassDamage = 0;
 	if (fireDamage >= 3)
 		fireDamage= (spec.characterAttack * (1 + (fireDamage - 3) / 4) * checkBoost({characterType: spec.characterType, damageType: 2}) * checkEffectivity({enemyType: spec.enemyType, damageType: 2})) -spec.enemyDefense;
+	else fireDamage = 0;
 	if (waterDamage >= 3)
 		waterDamage= (spec.characterAttack * (1 + (waterDamage - 3) / 4) * checkBoost({characterType: spec.characterType, damageType: 3}) * checkEffectivity({enemyType: spec.enemyType, damageType: 3})) -spec.enemyDefense;
+	else waterDamage = 0;
 	if (elecDamage >= 3)
 		elecDamage= (spec.characterAttack * (1 + (elecDamage - 3) / 4) * checkBoost({characterType: spec.characterType, damageType: 4}) * checkEffectivity({enemyType: spec.enemyType, damageType: 4})) -spec.enemyDefense;
+	else elecDamage = 0;
 	if (windDamage >= 3)
 		windDamage= (spec.characterAttack * (1 + (windDamage - 3) / 4) * checkBoost({characterType: spec.characterType, damageType: 5}) * checkEffectivity({enemyType: spec.enemyType, damageType: 5})) -spec.enemyDefense;
+	else windDamage = 0;
 
 	if(grassDamage <= 0)
 		grassDamage = 0;
