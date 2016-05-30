@@ -22,6 +22,9 @@ include 'checkNivel.php';
 	$exp = $row["Exp_actual"];
 	if ($setunlock == $row["nivelmapa"]){
 		$setunlock = $setunlock+1;
+		if ($setunlock >= 5){
+			$setunlock = 5;
+		}
 
 	}
 	else{

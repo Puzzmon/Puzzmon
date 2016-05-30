@@ -95,9 +95,9 @@ session_start();
 					<label id='tipo' for='tipo' class="tipo" >1</label>
 					<select name="tipo">
 						<option value='1'>Samuleaf</option>
-						<option value='2'>Lampkin</option>
+						<option value='2'>Mandiflare</option>
 						<option value='3'>Droppentice</option>
-						<option value='4'>Placeholder</option>
+						<option value='4'>Holook</option>
 						<option value='5'>Wingskull</option>
 					</select>
 					<label class="atras" onclick="closeregister()">x</label>

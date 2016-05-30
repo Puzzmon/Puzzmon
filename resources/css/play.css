@@ -44,7 +44,7 @@ div.nivel2{
 	text-align: center;
 	height: 40%;
 	min-height: 40%;
-	background-image: url('../img/fondos/agua.jpg');
+	background-image: url('../img/fondos/viento.jpg');
 	background-size: 100%;
 	background-repeat: no-repeat;
 }
@@ -53,7 +53,7 @@ div.nivel3{
 	text-align: center;
 	height: 40%;
 	min-height: 40%;
-	background-image: url('../img/fondos/.jpg');
+	background-image: url('../img/fondos/agua.jpg');
 	background-size: 100%;
 	background-repeat: no-repeat;
 }

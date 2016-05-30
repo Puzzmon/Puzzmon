@@ -12,8 +12,8 @@ session_start();
 	<?php
 		if (isset($_POST["lvlid"]))
 		{
-			$levelID = $_SESSION["mascota"] * ($_POST["lvlid"] - 1);
-			$classlvl = 'nivel'.$levelID;
+			$levelID = $_SESSION["mascota"] + ($_POST["lvlid"] - 1) * 5;
+			$classlvl = 'nivel'.$_POST["lvlid"];
 		}
 		else header('location: index.php');
 		echo '<script> levelID = '.$levelID.'</script>';
